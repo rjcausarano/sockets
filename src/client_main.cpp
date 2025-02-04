@@ -12,7 +12,12 @@ int main(int argc, char const* argv[])
 
     Client client(argv[1]);
     client.Connect();
-    client.Send();
+    client.Send("I");
+    client.Send("am");
+    client.Send("short");
+    client.Send("First message");
+    client.Send("Second");
+    client.Send("Hello World");
     client.Close();
 
     return 0;

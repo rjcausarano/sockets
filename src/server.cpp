@@ -44,10 +44,10 @@ Server::Server() : buffer_{0} {
 
 void Server::Listen(){
     if ((socket_handle_ = accept(server_fd_, (struct sockaddr*)&address_, &addrlen_))) {
-        ssize_t bytes = read(socket_handle_, buffer_, BUFFER_SIZE - 1);
-        printf("%s\n", buffer_);
-        const char* hello = "Hello from server";
-        send(socket_handle_, hello, strlen(hello), 0);
+        ssize_t bytes;
+        while((bytes = read(socket_handle_, buffer_, BUFFER_SIZE - 1))){
+            send(socket_handle_, buffer_, bytes, 0);
+        }
     } else {
         perror("error accepting connection");
         exit(EXIT_FAILURE);

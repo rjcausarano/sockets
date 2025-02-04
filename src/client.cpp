@@ -30,10 +30,10 @@ void Client::Connect(){
     }
 }
 
-void Client::Send(){
-    const char* hello = "Hello from client";
-    send(client_fd_, hello, strlen(hello), 0);
+void Client::Send(const char* msg){
+    send(client_fd_, msg, strlen(msg), 0);
     ssize_t bytes = read(client_fd_, buffer_, BUFFER_SIZE - 1);
+    buffer_[bytes] = '\0';
     printf("%s\n", buffer_);
 }
 
