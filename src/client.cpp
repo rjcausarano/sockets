@@ -1,49 +1,42 @@
-#include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
 #include <unistd.h>
 
-#define PROTOCOL 0
-#define PORT 8080
-#define BUFFER_SIZE 1024
-#define TRUE 1
-#define FALSE 0
+#include "client.h"
 
-int main(int argc, char const* argv[])
-{
-    int client_fd;
-    struct sockaddr_in serv_addr;
-    const char* hello = "Hello from client";
-    char buffer[BUFFER_SIZE] = { 0 };
-    if ((client_fd = socket(AF_INET, SOCK_STREAM, PROTOCOL)) < 0) {
-        printf("\n Socket creation error \n");
+Client::Client(const char * server_ip) : buffer_{0} {
+    if ((client_fd_ = socket(AF_INET, SOCK_STREAM, PROTOCOL)) < 0) {
+        perror("\n Socket creation error \n");
         exit(EXIT_FAILURE);
     }
 
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(PORT);
+    serv_addr_.sin_family = AF_INET;
+    serv_addr_.sin_port = htons(PORT);
 
     // Convert IPv4 and IPv6 addresses from text to binary
     // form
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)
+    if (inet_pton(AF_INET, server_ip, &serv_addr_.sin_addr)
         <= 0) {
-        printf(
-            "\nInvalid address/ Address not supported \n");
+        perror("\nInvalid address/ Address not supported \n");
         exit(EXIT_FAILURE);
     }
+}
 
-    if (connect(client_fd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-        printf("\nConnection Failed \n");
+void Client::Connect(){
+    if (connect(client_fd_, (struct sockaddr*)&serv_addr_, sizeof(serv_addr_)) < 0) {
+        perror("\nConnection Failed \n");
         exit(EXIT_FAILURE);
     }
+}
 
-    send(client_fd, hello, strlen(hello), 0);
-    ssize_t bytes = read(client_fd, buffer, BUFFER_SIZE - 1);
-    printf("%s\n", buffer);
+void Client::Send(){
+    const char* hello = "Hello from client";
+    send(client_fd_, hello, strlen(hello), 0);
+    ssize_t bytes = read(client_fd_, buffer_, BUFFER_SIZE - 1);
+    printf("%s\n", buffer_);
+}
 
-    // closing the connected socket
-    close(client_fd);
-    return 0;
+void Client::Close(){
+    close(client_fd_);
 }
