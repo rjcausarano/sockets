@@ -7,8 +7,9 @@
 class Server{
 public:
     Server();
+    ~Server();
     void Listen();
-    void Close();
+    
 private:
     int server_fd_, socket_handle_;
     int opt_{TRUE};

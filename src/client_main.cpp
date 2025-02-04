@@ -18,7 +18,6 @@ int main(int argc, char const* argv[])
     client.Send("First message");
     client.Send("Second");
     client.Send("Hello World");
-    client.Close();
 
     return 0;
 }

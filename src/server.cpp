@@ -54,7 +54,8 @@ void Server::Listen(){
     }
 }
 
-void Server::Close(){
+Server::~Server(){
+    printf("Server destructor called\n");
     close(socket_handle_);
     close(server_fd_);
 }

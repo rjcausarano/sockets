@@ -37,6 +37,7 @@ void Client::Send(const char* msg){
     printf("%s\n", buffer_);
 }
 
-void Client::Close(){
+Client::~Client(){
+    printf("Client destructor called\n");
     close(client_fd_);
 }

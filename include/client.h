@@ -7,9 +7,9 @@
 class Client{
 public:
     Client(const char * server_ip);
+    ~Client();
     void Connect();
     void Send(const char* msg);
-    void Close();
 
 private:
     int client_fd_;
