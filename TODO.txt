@@ -1,0 +1,1 @@
+There is a bug where client keeps running after server receives quit message and exits.

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <string>
 
 #include "server.h"
 
@@ -46,7 +47,17 @@ void Server::Listen(){
     if ((socket_handle_ = accept(server_fd_, (struct sockaddr*)&address_, &addrlen_))) {
         ssize_t bytes;
         while((bytes = read(socket_handle_, buffer_, BUFFER_SIZE - 1))){
-            send(socket_handle_, buffer_, bytes, 0);
+            printf("%s\n", buffer_);
+            std::string msg(buffer_);
+            std::string response;
+            if(msg == "Hello"){
+                response = "Hey there";
+            } else if(msg == "quit"){
+                return;
+            } else {
+                response = "I didn't understand your message";
+            }
+            send(socket_handle_, response.c_str(), response.size() + 1, 0);
         }
     } else {
         perror("error accepting connection");
@@ -55,7 +66,6 @@ void Server::Listen(){
 }
 
 Server::~Server(){
-    printf("Server destructor called\n");
     close(socket_handle_);
     close(server_fd_);
 }
