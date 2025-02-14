@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message Header {
+
+  enum Type {
+    NONE = 0;
+    ENTITY = 1;
+  }
+
+  Type type = 1;
+  string data = 2;
+}

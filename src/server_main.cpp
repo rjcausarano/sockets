@@ -1,5 +1,5 @@
 #include "server.h"
-#include "../proto/person.pb.h"
+// #include "../proto/person.pb.h"
 
 int main(int argc, char const* argv[]){
 

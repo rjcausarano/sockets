@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message Entity {
+
+  enum Type {
+    FILE = 0;
+    DIRECTORY = 1;
+  }
+
+  Type type = 1;
+  string name = 2;
+  repeated Entity entities = 3;
+}
