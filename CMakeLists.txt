@@ -7,18 +7,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(Protobuf REQUIRED CONFIG)
 
 set(SERVER_SOURCES
-    src/server_main.cpp
-    src/server.cpp
+    src/server_main.cc
+    src/server.cc
 )
 
 set(CLIENT_SOURCES
-    src/client_main.cpp
-    src/client.cpp
+    src/client_main.cc
+    src/client.cc
 )
 
 set(TEST_SOURCES
-    src/test.cpp
-    src/header_factory.cpp
+    src/test.cc
+    src/header_factory.cc
     proto/header.pb.cc
     proto/dir_descriptor.pb.cc
 )
