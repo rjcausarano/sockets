@@ -1,15 +1,15 @@
 #pragma once
 
 #include <arpa/inet.h>
-
 #include "socket_common.h"
+#include <string>
 
 class Client{
 public:
     Client(const char * server_ip);
     ~Client();
     void Connect();
-    void Send(const char* msg);
+    std::string Send(const char* msg);
 
 private:
     int client_fd_;

@@ -1,10 +1,10 @@
+#include "server.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <string>
-
-#include "server.h"
 
 Server::Server() : buffer_{0} {
     addrlen_ = sizeof(address_);
@@ -43,20 +43,30 @@ Server::Server() : buffer_{0} {
     }
 }
 
-void Server::Listen(){
+std::string Server::processHeader(const Header& header){
+  switch(header.type()){
+    case Header::NONE:
+      return "Successfully processed NONE type header.";
+      break;
+    default:
+      return "Don't know how to process that type of header.";
+  }
+}
+
+void Server::listenToClient(){
     if ((socket_handle_ = accept(server_fd_, (struct sockaddr*)&address_, &addrlen_))) {
         ssize_t bytes;
         while((bytes = read(socket_handle_, buffer_, BUFFER_SIZE - 1))){
-            printf("%s\n", buffer_);
-            std::string msg(buffer_);
+            std::string stringData(buffer_);
+            Header data;
             std::string response;
-            if(msg == "Hello"){
-                response = "Hey there";
-            } else if(msg == "quit"){
-                return;
-            } else {
-                response = "I didn't understand your message";
+
+            if(!data.ParseFromString(stringData)){
+              response = "Unable to parse data";
+            } else{
+              response = processHeader(data);
             }
+            
             send(socket_handle_, response.c_str(), response.size() + 1, 0);
         }
     } else {

@@ -3,12 +3,14 @@
 #include <netinet/in.h>
 
 #include "socket_common.h"
+#include "../proto/header.pb.h"
 
 class Server{
 public:
     Server();
     ~Server();
-    void Listen();
+    void listenToClient();
+    std::string processHeader(const Header& header);
     
 private:
     int server_fd_, socket_handle_;
