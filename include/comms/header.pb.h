@@ -23,13 +23,10 @@
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
-#include "google/protobuf/generated_message_reflection.h"
-#include "google/protobuf/message.h"
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
-#include "google/protobuf/generated_enum_reflection.h"
-#include "google/protobuf/unknown_field_set.h"
+#include "google/protobuf/generated_enum_util.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -50,8 +47,6 @@ template <typename T>
 struct TableStruct_comms_2fheader_2eproto {
   static const ::uint32_t offsets[];
 };
-extern const ::google::protobuf::internal::DescriptorTable
-    descriptor_table_comms_2fheader_2eproto;
 class Header;
 struct HeaderDefaultTypeInternal;
 extern HeaderDefaultTypeInternal _Header_default_instance_;
@@ -75,8 +70,7 @@ extern const uint32_t Header_Type_internal_data_[];
 constexpr Header_Type Header_Type_Type_MIN = static_cast<Header_Type>(0);
 constexpr Header_Type Header_Type_Type_MAX = static_cast<Header_Type>(2);
 constexpr int Header_Type_Type_ARRAYSIZE = 2 + 1;
-const ::google::protobuf::EnumDescriptor*
-Header_Type_descriptor();
+const std::string& Header_Type_Name(Header_Type value);
 template <typename T>
 const std::string& Header_Type_Name(T value) {
   static_assert(std::is_same<T, Header_Type>::value ||
@@ -84,16 +78,7 @@ const std::string& Header_Type_Name(T value) {
                 "Incorrect type passed to Type_Name().");
   return Header_Type_Name(static_cast<Header_Type>(value));
 }
-template <>
-inline const std::string& Header_Type_Name(Header_Type value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<Header_Type_descriptor,
-                                                 0, 2>(
-      static_cast<int>(value));
-}
-inline bool Header_Type_Parse(absl::string_view name, Header_Type* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Header_Type>(
-      Header_Type_descriptor(), name, value);
-}
+bool Header_Type_Parse(absl::string_view name, Header_Type* value);
 enum Header_DataType : int {
   Header_DataType_STRING = 0,
   Header_DataType_ENTITY = 1,
@@ -108,8 +93,7 @@ extern const uint32_t Header_DataType_internal_data_[];
 constexpr Header_DataType Header_DataType_DataType_MIN = static_cast<Header_DataType>(0);
 constexpr Header_DataType Header_DataType_DataType_MAX = static_cast<Header_DataType>(1);
 constexpr int Header_DataType_DataType_ARRAYSIZE = 1 + 1;
-const ::google::protobuf::EnumDescriptor*
-Header_DataType_descriptor();
+const std::string& Header_DataType_Name(Header_DataType value);
 template <typename T>
 const std::string& Header_DataType_Name(T value) {
   static_assert(std::is_same<T, Header_DataType>::value ||
@@ -117,23 +101,14 @@ const std::string& Header_DataType_Name(T value) {
                 "Incorrect type passed to DataType_Name().");
   return Header_DataType_Name(static_cast<Header_DataType>(value));
 }
-template <>
-inline const std::string& Header_DataType_Name(Header_DataType value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<Header_DataType_descriptor,
-                                                 0, 1>(
-      static_cast<int>(value));
-}
-inline bool Header_DataType_Parse(absl::string_view name, Header_DataType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Header_DataType>(
-      Header_DataType_descriptor(), name, value);
-}
+bool Header_DataType_Parse(absl::string_view name, Header_DataType* value);
 
 // ===================================================================
 
 
 // -------------------------------------------------------------------
 
-class Header final : public ::google::protobuf::Message
+class Header final : public ::google::protobuf::MessageLite
 /* @@protoc_insertion_point(class_definition:Header) */ {
  public:
   inline Header() : Header(nullptr) {}
@@ -167,24 +142,15 @@ class Header final : public ::google::protobuf::Message
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  inline const std::string& unknown_fields() const
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+    return _internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString);
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  inline std::string* mutable_unknown_fields()
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
   static const Header& default_instance() {
     return *internal_default_instance();
   }
@@ -211,17 +177,14 @@ class Header final : public ::google::protobuf::Message
   // implements Message ----------------------------------------------
 
   Header* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<Header>(arena);
+    return ::google::protobuf::MessageLite::DefaultConstruct<Header>(arena);
   }
-  using ::google::protobuf::Message::CopyFrom;
   void CopyFrom(const Header& from);
-  using ::google::protobuf::Message::MergeFrom;
   void MergeFrom(const Header& from) { Header::MergeImpl(*this, from); }
 
   private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
 
   public:
   bool IsInitialized() const {
@@ -271,10 +234,9 @@ class Header final : public ::google::protobuf::Message
   static void* PlacementNew_(const void*, void* mem,
                              ::google::protobuf::Arena* arena);
   static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+  static const ::google::protobuf::internal::ClassDataLite<7> _class_data_;
 
  public:
-  ::google::protobuf::Metadata GetMetadata() const;
   // nested types ----------------------------------------------------
   using Type = Header_Type;
   static constexpr Type COMMAND = Header_Type_COMMAND;
@@ -286,9 +248,6 @@ class Header final : public ::google::protobuf::Message
   static constexpr Type Type_MIN = Header_Type_Type_MIN;
   static constexpr Type Type_MAX = Header_Type_Type_MAX;
   static constexpr int Type_ARRAYSIZE = Header_Type_Type_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor* Type_descriptor() {
-    return Header_Type_descriptor();
-  }
   template <typename T>
   static inline const std::string& Type_Name(T value) {
     return Header_Type_Name(value);
@@ -305,9 +264,6 @@ class Header final : public ::google::protobuf::Message
   static constexpr DataType DataType_MIN = Header_DataType_DataType_MIN;
   static constexpr DataType DataType_MAX = Header_DataType_DataType_MAX;
   static constexpr int DataType_ARRAYSIZE = Header_DataType_DataType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor* DataType_descriptor() {
-    return Header_DataType_descriptor();
-  }
   template <typename T>
   static inline const std::string& DataType_Name(T value) {
     return Header_DataType_Name(value);
@@ -478,15 +434,7 @@ namespace protobuf {
 template <>
 struct is_proto_enum<::Header_Type> : std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor<::Header_Type>() {
-  return ::Header_Type_descriptor();
-}
-template <>
 struct is_proto_enum<::Header_DataType> : std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor<::Header_DataType>() {
-  return ::Header_DataType_descriptor();
-}
 
 }  // namespace protobuf
 }  // namespace google

@@ -12,10 +12,7 @@
 #include "google/protobuf/extension_set.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/wire_format_lite.h"
-#include "google/protobuf/descriptor.h"
-#include "google/protobuf/generated_message_reflection.h"
-#include "google/protobuf/reflection_ops.h"
-#include "google/protobuf/wire_format.h"
+#include "google/protobuf/io/zero_copy_stream_impl_lite.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -36,9 +33,9 @@ inline constexpr Header::Impl_::Impl_(
 template <typename>
 PROTOBUF_CONSTEXPR Header::Header(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
+    : ::google::protobuf::MessageLite(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
+    : ::google::protobuf::MessageLite(),
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
@@ -52,64 +49,55 @@ struct HeaderDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 HeaderDefaultTypeInternal _Header_default_instance_;
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_comms_2fheader_2eproto[2];
-static constexpr const ::_pb::ServiceDescriptor**
-    file_level_service_descriptors_comms_2fheader_2eproto = nullptr;
-const ::uint32_t
-    TableStruct_comms_2fheader_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
-        protodesc_cold) = {
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::Header, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::Header, _impl_.type_),
-        PROTOBUF_FIELD_OFFSET(::Header, _impl_.data_),
-};
-
-static const ::_pbi::MigrationSchema
-    schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::Header)},
-};
-static const ::_pb::Message* const file_default_instances[] = {
-    &::_Header_default_instance_._instance,
-};
-const char descriptor_table_protodef_comms_2fheader_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
-    protodesc_cold) = {
-    "\n\022comms/header.proto\"\206\001\n\006Header\022\032\n\004type\030"
-    "\001 \001(\0162\014.Header.Type\022\014\n\004data\030\002 \001(\t\".\n\004Typ"
-    "e\022\013\n\007COMMAND\020\000\022\013\n\007REQUEST\020\001\022\014\n\010RESPONSE\020"
-    "\002\"\"\n\010DataType\022\n\n\006STRING\020\000\022\n\n\006ENTITY\020\001b\006p"
-    "roto3"
-};
-static ::absl::once_flag descriptor_table_comms_2fheader_2eproto_once;
-PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_comms_2fheader_2eproto = {
-    false,
-    false,
-    165,
-    descriptor_table_protodef_comms_2fheader_2eproto,
-    "comms/header.proto",
-    &descriptor_table_comms_2fheader_2eproto_once,
-    nullptr,
-    0,
-    1,
-    schemas,
-    file_default_instances,
-    TableStruct_comms_2fheader_2eproto::offsets,
-    file_level_enum_descriptors_comms_2fheader_2eproto,
-    file_level_service_descriptors_comms_2fheader_2eproto,
-};
-const ::google::protobuf::EnumDescriptor* Header_Type_descriptor() {
-  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_comms_2fheader_2eproto);
-  return file_level_enum_descriptors_comms_2fheader_2eproto[0];
-}
 PROTOBUF_CONSTINIT const uint32_t Header_Type_internal_data_[] = {
     196608u, 0u, };
 bool Header_Type_IsValid(int value) {
   return 0 <= value && value <= 2;
+}
+static ::google::protobuf::internal::ExplicitlyConstructed<std::string>
+    Header_Type_strings[3] = {};
+
+static const char Header_Type_names[] = {
+    "COMMAND"
+    "REQUEST"
+    "RESPONSE"
+};
+
+static const ::google::protobuf::internal::EnumEntry Header_Type_entries[] =
+    {
+        {{&Header_Type_names[0], 7}, 0},
+        {{&Header_Type_names[7], 7}, 1},
+        {{&Header_Type_names[14], 8}, 2},
+};
+
+static const int Header_Type_entries_by_number[] = {
+    0,  // 0 -> COMMAND
+    1,  // 1 -> REQUEST
+    2,  // 2 -> RESPONSE
+};
+
+const std::string& Header_Type_Name(Header_Type value) {
+  static const bool kDummy =
+      ::google::protobuf::internal::InitializeEnumStrings(
+          Header_Type_entries, Header_Type_entries_by_number,
+          3, Header_Type_strings);
+  (void)kDummy;
+
+  int idx = ::google::protobuf::internal::LookUpEnumName(
+      Header_Type_entries, Header_Type_entries_by_number, 3,
+      value);
+  return idx == -1 ? ::google::protobuf::internal::GetEmptyString()
+                   : Header_Type_strings[idx].get();
+}
+
+bool Header_Type_Parse(absl::string_view name, Header_Type* value) {
+  int int_value;
+  bool success = ::google::protobuf::internal::LookUpEnumValue(
+      Header_Type_entries, 3, name, &int_value);
+  if (success) {
+    *value = static_cast<Header_Type>(int_value);
+  }
+  return success;
 }
 #if (__cplusplus < 201703) && \
   (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
@@ -123,14 +111,52 @@ constexpr int Header::Type_ARRAYSIZE;
 
 #endif  // (__cplusplus < 201703) &&
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-const ::google::protobuf::EnumDescriptor* Header_DataType_descriptor() {
-  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_comms_2fheader_2eproto);
-  return file_level_enum_descriptors_comms_2fheader_2eproto[1];
-}
 PROTOBUF_CONSTINIT const uint32_t Header_DataType_internal_data_[] = {
     131072u, 0u, };
 bool Header_DataType_IsValid(int value) {
   return 0 <= value && value <= 1;
+}
+static ::google::protobuf::internal::ExplicitlyConstructed<std::string>
+    Header_DataType_strings[2] = {};
+
+static const char Header_DataType_names[] = {
+    "ENTITY"
+    "STRING"
+};
+
+static const ::google::protobuf::internal::EnumEntry Header_DataType_entries[] =
+    {
+        {{&Header_DataType_names[0], 6}, 1},
+        {{&Header_DataType_names[6], 6}, 0},
+};
+
+static const int Header_DataType_entries_by_number[] = {
+    1,  // 0 -> STRING
+    0,  // 1 -> ENTITY
+};
+
+const std::string& Header_DataType_Name(Header_DataType value) {
+  static const bool kDummy =
+      ::google::protobuf::internal::InitializeEnumStrings(
+          Header_DataType_entries, Header_DataType_entries_by_number,
+          2, Header_DataType_strings);
+  (void)kDummy;
+
+  int idx = ::google::protobuf::internal::LookUpEnumName(
+      Header_DataType_entries, Header_DataType_entries_by_number, 2,
+      value);
+  return idx == -1 ? ::google::protobuf::internal::GetEmptyString()
+                   : Header_DataType_strings[idx].get();
+}
+
+bool Header_DataType_Parse(absl::string_view name, Header_DataType* value) {
+  int int_value;
+  bool success = ::google::protobuf::internal::LookUpEnumValue(
+      Header_DataType_entries, 2, name, &int_value);
+  if (success) {
+    *value = static_cast<Header_DataType>(int_value);
+  }
+  return success;
 }
 #if (__cplusplus < 201703) && \
   (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
@@ -151,9 +177,9 @@ class Header::_Internal {
 
 Header::Header(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
+    : ::google::protobuf::MessageLite(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
+    : ::google::protobuf::MessageLite(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:Header)
@@ -168,13 +194,13 @@ Header::Header(
     ::google::protobuf::Arena* arena,
     const Header& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
+    : ::google::protobuf::MessageLite(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
+    : ::google::protobuf::MessageLite(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   Header* const _this = this;
   (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+  _internal_metadata_.MergeFrom<std::string>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   _impl_.type_ = from._impl_.type_;
@@ -197,7 +223,7 @@ Header::~Header() {
 }
 inline void Header::SharedDtor(MessageLite& self) {
   Header& this_ = static_cast<Header&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  this_._internal_metadata_.Delete<std::string>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.data_.Destroy();
   this_._impl_.~Impl_();
@@ -213,29 +239,25 @@ constexpr auto Header::InternalNewImpl_() {
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull Header::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
+const ::google::protobuf::internal::ClassDataLite<7> Header::_class_data_ = {
+    {
         &_Header_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
         &Header::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<Header>(),
+        ::google::protobuf::MessageLite::GetNewImpl<Header>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
         &Header::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<Header>(), &Header::ByteSizeLong,
+        ::google::protobuf::MessageLite::GetClearImpl<Header>(), &Header::ByteSizeLong,
             &Header::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
         PROTOBUF_FIELD_OFFSET(Header, _impl_._cached_size_),
-        false,
+        true,
     },
-    &Header::kDescriptorMethods,
-    &descriptor_table_comms_2fheader_2eproto,
-    nullptr,  // tracker
+    "Header",
 };
 const ::google::protobuf::internal::ClassData* Header::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -252,7 +274,7 @@ const ::_pbi::TcParseTable<1, 2, 0, 19, 2> Header::_table_ = {
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
     nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
+    ::_pbi::TcParser::GenericFallbackLite,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
     ::_pbi::TcParser::GetTable<::Header>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
@@ -261,7 +283,7 @@ const ::_pbi::TcParseTable<1, 2, 0, 19, 2> Header::_table_ = {
     {::_pbi::TcParser::FastUS1,
      {18, 63, 0, PROTOBUF_FIELD_OFFSET(Header, _impl_.data_)}},
     // .Header.Type type = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Header, _impl_.type_), 63>(),
+    {::_pbi::TcParser::FastV32S1,
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(Header, _impl_.type_)}},
   }}, {{
     65535, 65535
@@ -290,7 +312,7 @@ PROTOBUF_NOINLINE void Header::Clear() {
 
   _impl_.data_.ClearToEmpty();
   _impl_.type_ = 0;
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+  _internal_metadata_.Clear<std::string>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -324,9 +346,9 @@ PROTOBUF_NOINLINE void Header::Clear() {
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+            target = stream->WriteRaw(
+                this_._internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString).data(),
+                static_cast<int>(this_._internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString).size()), target);
           }
           // @@protoc_insertion_point(serialize_to_array_end:Header)
           return target;
@@ -359,8 +381,11 @@ PROTOBUF_NOINLINE void Header::Clear() {
                             ::_pbi::WireFormatLite::EnumSize(this_._internal_type());
             }
           }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            total_size += this_._internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString).size();
+          }
+          this_._impl_._cached_size_.Set(::_pbi::ToCachedSize(total_size));
+          return total_size;
         }
 
 void Header::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
@@ -377,7 +402,7 @@ void Header::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::
   if (from._internal_type() != 0) {
     _this->_impl_.type_ = from._impl_.type_;
   }
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<std::string>(from._internal_metadata_);
 }
 
 void Header::CopyFrom(const Header& from) {
@@ -397,17 +422,10 @@ void Header::InternalSwap(Header* PROTOBUF_RESTRICT other) {
   swap(_impl_.type_, other->_impl_.type_);
 }
 
-::google::protobuf::Metadata Header::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
 // @@protoc_insertion_point(namespace_scope)
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 // @@protoc_insertion_point(global_scope)
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::std::false_type
-    _static_init2_ PROTOBUF_UNUSED =
-        (::_pbi::AddDescriptors(&descriptor_table_comms_2fheader_2eproto),
-         ::std::false_type{});
 #include "google/protobuf/port_undef.inc"

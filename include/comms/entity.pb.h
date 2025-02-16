@@ -23,13 +23,10 @@
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
-#include "google/protobuf/generated_message_reflection.h"
-#include "google/protobuf/message.h"
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
-#include "google/protobuf/generated_enum_reflection.h"
-#include "google/protobuf/unknown_field_set.h"
+#include "google/protobuf/generated_enum_util.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -50,8 +47,6 @@ template <typename T>
 struct TableStruct_comms_2fentity_2eproto {
   static const ::uint32_t offsets[];
 };
-extern const ::google::protobuf::internal::DescriptorTable
-    descriptor_table_comms_2fentity_2eproto;
 class Entity;
 struct EntityDefaultTypeInternal;
 extern EntityDefaultTypeInternal _Entity_default_instance_;
@@ -74,8 +69,7 @@ extern const uint32_t Entity_Type_internal_data_[];
 constexpr Entity_Type Entity_Type_Type_MIN = static_cast<Entity_Type>(0);
 constexpr Entity_Type Entity_Type_Type_MAX = static_cast<Entity_Type>(1);
 constexpr int Entity_Type_Type_ARRAYSIZE = 1 + 1;
-const ::google::protobuf::EnumDescriptor*
-Entity_Type_descriptor();
+const std::string& Entity_Type_Name(Entity_Type value);
 template <typename T>
 const std::string& Entity_Type_Name(T value) {
   static_assert(std::is_same<T, Entity_Type>::value ||
@@ -83,23 +77,14 @@ const std::string& Entity_Type_Name(T value) {
                 "Incorrect type passed to Type_Name().");
   return Entity_Type_Name(static_cast<Entity_Type>(value));
 }
-template <>
-inline const std::string& Entity_Type_Name(Entity_Type value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<Entity_Type_descriptor,
-                                                 0, 1>(
-      static_cast<int>(value));
-}
-inline bool Entity_Type_Parse(absl::string_view name, Entity_Type* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Entity_Type>(
-      Entity_Type_descriptor(), name, value);
-}
+bool Entity_Type_Parse(absl::string_view name, Entity_Type* value);
 
 // ===================================================================
 
 
 // -------------------------------------------------------------------
 
-class Entity final : public ::google::protobuf::Message
+class Entity final : public ::google::protobuf::MessageLite
 /* @@protoc_insertion_point(class_definition:Entity) */ {
  public:
   inline Entity() : Entity(nullptr) {}
@@ -133,24 +118,15 @@ class Entity final : public ::google::protobuf::Message
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+  inline const std::string& unknown_fields() const
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+    return _internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString);
   }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+  inline std::string* mutable_unknown_fields()
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
   static const Entity& default_instance() {
     return *internal_default_instance();
   }
@@ -177,17 +153,14 @@ class Entity final : public ::google::protobuf::Message
   // implements Message ----------------------------------------------
 
   Entity* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<Entity>(arena);
+    return ::google::protobuf::MessageLite::DefaultConstruct<Entity>(arena);
   }
-  using ::google::protobuf::Message::CopyFrom;
   void CopyFrom(const Entity& from);
-  using ::google::protobuf::Message::MergeFrom;
   void MergeFrom(const Entity& from) { Entity::MergeImpl(*this, from); }
 
   private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
 
   public:
   bool IsInitialized() const {
@@ -237,10 +210,9 @@ class Entity final : public ::google::protobuf::Message
   static void* PlacementNew_(const void*, void* mem,
                              ::google::protobuf::Arena* arena);
   static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+  static const ::google::protobuf::internal::ClassDataLite<7> _class_data_;
 
  public:
-  ::google::protobuf::Metadata GetMetadata() const;
   // nested types ----------------------------------------------------
   using Type = Entity_Type;
   static constexpr Type FILE = Entity_Type_FILE;
@@ -251,9 +223,6 @@ class Entity final : public ::google::protobuf::Message
   static constexpr Type Type_MIN = Entity_Type_Type_MIN;
   static constexpr Type Type_MAX = Entity_Type_Type_MAX;
   static constexpr int Type_ARRAYSIZE = Entity_Type_Type_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor* Type_descriptor() {
-    return Entity_Type_descriptor();
-  }
   template <typename T>
   static inline const std::string& Type_Name(T value) {
     return Entity_Type_Name(value);
@@ -491,10 +460,6 @@ namespace protobuf {
 
 template <>
 struct is_proto_enum<::Entity_Type> : std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor<::Entity_Type>() {
-  return ::Entity_Type_descriptor();
-}
 
 }  // namespace protobuf
 }  // namespace google

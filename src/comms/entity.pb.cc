@@ -12,10 +12,7 @@
 #include "google/protobuf/extension_set.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/wire_format_lite.h"
-#include "google/protobuf/descriptor.h"
-#include "google/protobuf/generated_message_reflection.h"
-#include "google/protobuf/reflection_ops.h"
-#include "google/protobuf/wire_format.h"
+#include "google/protobuf/io/zero_copy_stream_impl_lite.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -37,9 +34,9 @@ inline constexpr Entity::Impl_::Impl_(
 template <typename>
 PROTOBUF_CONSTEXPR Entity::Entity(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
+    : ::google::protobuf::MessageLite(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
+    : ::google::protobuf::MessageLite(),
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
@@ -53,64 +50,52 @@ struct EntityDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EntityDefaultTypeInternal _Entity_default_instance_;
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_comms_2fentity_2eproto[1];
-static constexpr const ::_pb::ServiceDescriptor**
-    file_level_service_descriptors_comms_2fentity_2eproto = nullptr;
-const ::uint32_t
-    TableStruct_comms_2fentity_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
-        protodesc_cold) = {
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::Entity, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::Entity, _impl_.type_),
-        PROTOBUF_FIELD_OFFSET(::Entity, _impl_.name_),
-        PROTOBUF_FIELD_OFFSET(::Entity, _impl_.entities_),
-};
-
-static const ::_pbi::MigrationSchema
-    schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::Entity)},
-};
-static const ::_pb::Message* const file_default_instances[] = {
-    &::_Entity_default_instance_._instance,
-};
-const char descriptor_table_protodef_comms_2fentity_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
-    protodesc_cold) = {
-    "\n\022comms/entity.proto\"n\n\006Entity\022\032\n\004type\030\001"
-    " \001(\0162\014.Entity.Type\022\014\n\004name\030\002 \001(\t\022\031\n\010enti"
-    "ties\030\003 \003(\0132\007.Entity\"\037\n\004Type\022\010\n\004FILE\020\000\022\r\n"
-    "\tDIRECTORY\020\001b\006proto3"
-};
-static ::absl::once_flag descriptor_table_comms_2fentity_2eproto_once;
-PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_comms_2fentity_2eproto = {
-    false,
-    false,
-    140,
-    descriptor_table_protodef_comms_2fentity_2eproto,
-    "comms/entity.proto",
-    &descriptor_table_comms_2fentity_2eproto_once,
-    nullptr,
-    0,
-    1,
-    schemas,
-    file_default_instances,
-    TableStruct_comms_2fentity_2eproto::offsets,
-    file_level_enum_descriptors_comms_2fentity_2eproto,
-    file_level_service_descriptors_comms_2fentity_2eproto,
-};
-const ::google::protobuf::EnumDescriptor* Entity_Type_descriptor() {
-  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_comms_2fentity_2eproto);
-  return file_level_enum_descriptors_comms_2fentity_2eproto[0];
-}
 PROTOBUF_CONSTINIT const uint32_t Entity_Type_internal_data_[] = {
     131072u, 0u, };
 bool Entity_Type_IsValid(int value) {
   return 0 <= value && value <= 1;
+}
+static ::google::protobuf::internal::ExplicitlyConstructed<std::string>
+    Entity_Type_strings[2] = {};
+
+static const char Entity_Type_names[] = {
+    "DIRECTORY"
+    "FILE"
+};
+
+static const ::google::protobuf::internal::EnumEntry Entity_Type_entries[] =
+    {
+        {{&Entity_Type_names[0], 9}, 1},
+        {{&Entity_Type_names[9], 4}, 0},
+};
+
+static const int Entity_Type_entries_by_number[] = {
+    1,  // 0 -> FILE
+    0,  // 1 -> DIRECTORY
+};
+
+const std::string& Entity_Type_Name(Entity_Type value) {
+  static const bool kDummy =
+      ::google::protobuf::internal::InitializeEnumStrings(
+          Entity_Type_entries, Entity_Type_entries_by_number,
+          2, Entity_Type_strings);
+  (void)kDummy;
+
+  int idx = ::google::protobuf::internal::LookUpEnumName(
+      Entity_Type_entries, Entity_Type_entries_by_number, 2,
+      value);
+  return idx == -1 ? ::google::protobuf::internal::GetEmptyString()
+                   : Entity_Type_strings[idx].get();
+}
+
+bool Entity_Type_Parse(absl::string_view name, Entity_Type* value) {
+  int int_value;
+  bool success = ::google::protobuf::internal::LookUpEnumValue(
+      Entity_Type_entries, 2, name, &int_value);
+  if (success) {
+    *value = static_cast<Entity_Type>(int_value);
+  }
+  return success;
 }
 #if (__cplusplus < 201703) && \
   (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
@@ -131,9 +116,9 @@ class Entity::_Internal {
 
 Entity::Entity(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
+    : ::google::protobuf::MessageLite(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
+    : ::google::protobuf::MessageLite(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:Entity)
@@ -149,13 +134,13 @@ Entity::Entity(
     ::google::protobuf::Arena* arena,
     const Entity& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
+    : ::google::protobuf::MessageLite(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
+    : ::google::protobuf::MessageLite(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   Entity* const _this = this;
   (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+  _internal_metadata_.MergeFrom<std::string>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   _impl_.type_ = from._impl_.type_;
@@ -179,7 +164,7 @@ Entity::~Entity() {
 }
 inline void Entity::SharedDtor(MessageLite& self) {
   Entity& this_ = static_cast<Entity&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  this_._internal_metadata_.Delete<std::string>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.name_.Destroy();
   this_._impl_.~Impl_();
@@ -194,7 +179,7 @@ constexpr auto Entity::InternalNewImpl_() {
       PROTOBUF_FIELD_OFFSET(Entity, _impl_.entities_) +
           decltype(Entity::_impl_.entities_)::
               InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
+                  ::google::protobuf::MessageLite::internal_visibility()),
   });
   if (arena_bits.has_value()) {
     return ::google::protobuf::internal::MessageCreator::CopyInit(
@@ -207,29 +192,25 @@ constexpr auto Entity::InternalNewImpl_() {
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull Entity::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
+const ::google::protobuf::internal::ClassDataLite<7> Entity::_class_data_ = {
+    {
         &_Entity_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
         &Entity::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<Entity>(),
+        ::google::protobuf::MessageLite::GetNewImpl<Entity>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
         &Entity::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<Entity>(), &Entity::ByteSizeLong,
+        ::google::protobuf::MessageLite::GetClearImpl<Entity>(), &Entity::ByteSizeLong,
             &Entity::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
         PROTOBUF_FIELD_OFFSET(Entity, _impl_._cached_size_),
-        false,
+        true,
     },
-    &Entity::kDescriptorMethods,
-    &descriptor_table_comms_2fentity_2eproto,
-    nullptr,  // tracker
+    "Entity",
 };
 const ::google::protobuf::internal::ClassData* Entity::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -246,14 +227,14 @@ const ::_pbi::TcParseTable<2, 3, 1, 19, 2> Entity::_table_ = {
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
+    ::_pbi::TcParser::GenericFallbackLite,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
     ::_pbi::TcParser::GetTable<::Entity>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
     // .Entity.Type type = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Entity, _impl_.type_), 63>(),
+    {::_pbi::TcParser::FastV32S1,
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(Entity, _impl_.type_)}},
     // string name = 2;
     {::_pbi::TcParser::FastUS1,
@@ -292,7 +273,7 @@ PROTOBUF_NOINLINE void Entity::Clear() {
   _impl_.entities_.Clear();
   _impl_.name_.ClearToEmpty();
   _impl_.type_ = 0;
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+  _internal_metadata_.Clear<std::string>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -337,9 +318,9 @@ PROTOBUF_NOINLINE void Entity::Clear() {
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+            target = stream->WriteRaw(
+                this_._internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString).data(),
+                static_cast<int>(this_._internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString).size()), target);
           }
           // @@protoc_insertion_point(serialize_to_array_end:Entity)
           return target;
@@ -381,8 +362,11 @@ PROTOBUF_NOINLINE void Entity::Clear() {
                             ::_pbi::WireFormatLite::EnumSize(this_._internal_type());
             }
           }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            total_size += this_._internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString).size();
+          }
+          this_._impl_._cached_size_.Set(::_pbi::ToCachedSize(total_size));
+          return total_size;
         }
 
 void Entity::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
@@ -401,7 +385,7 @@ void Entity::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::
   if (from._internal_type() != 0) {
     _this->_impl_.type_ = from._impl_.type_;
   }
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<std::string>(from._internal_metadata_);
 }
 
 void Entity::CopyFrom(const Entity& from) {
@@ -422,17 +406,10 @@ void Entity::InternalSwap(Entity* PROTOBUF_RESTRICT other) {
   swap(_impl_.type_, other->_impl_.type_);
 }
 
-::google::protobuf::Metadata Entity::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
 // @@protoc_insertion_point(namespace_scope)
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 // @@protoc_insertion_point(global_scope)
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::std::false_type
-    _static_init2_ PROTOBUF_UNUSED =
-        (::_pbi::AddDescriptors(&descriptor_table_comms_2fentity_2eproto),
-         ::std::false_type{});
 #include "google/protobuf/port_undef.inc"
