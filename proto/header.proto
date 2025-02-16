@@ -3,7 +3,13 @@ syntax = "proto3";
 message Header {
 
   enum Type {
-    NONE = 0;
+    COMMAND = 0;
+    REQUEST = 1;
+    RESPONSE = 2;
+  }
+
+  enum DataType {
+    STRING = 0;
     ENTITY = 1;
   }
 

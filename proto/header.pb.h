@@ -61,8 +61,9 @@ namespace protobuf {
 }  // namespace google
 
 enum Header_Type : int {
-  Header_Type_NONE = 0,
-  Header_Type_ENTITY = 1,
+  Header_Type_COMMAND = 0,
+  Header_Type_REQUEST = 1,
+  Header_Type_RESPONSE = 2,
   Header_Type_Header_Type_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
   Header_Type_Header_Type_INT_MAX_SENTINEL_DO_NOT_USE_ =
@@ -72,8 +73,8 @@ enum Header_Type : int {
 bool Header_Type_IsValid(int value);
 extern const uint32_t Header_Type_internal_data_[];
 constexpr Header_Type Header_Type_Type_MIN = static_cast<Header_Type>(0);
-constexpr Header_Type Header_Type_Type_MAX = static_cast<Header_Type>(1);
-constexpr int Header_Type_Type_ARRAYSIZE = 1 + 1;
+constexpr Header_Type Header_Type_Type_MAX = static_cast<Header_Type>(2);
+constexpr int Header_Type_Type_ARRAYSIZE = 2 + 1;
 const ::google::protobuf::EnumDescriptor*
 Header_Type_descriptor();
 template <typename T>
@@ -86,12 +87,45 @@ const std::string& Header_Type_Name(T value) {
 template <>
 inline const std::string& Header_Type_Name(Header_Type value) {
   return ::google::protobuf::internal::NameOfDenseEnum<Header_Type_descriptor,
-                                                 0, 1>(
+                                                 0, 2>(
       static_cast<int>(value));
 }
 inline bool Header_Type_Parse(absl::string_view name, Header_Type* value) {
   return ::google::protobuf::internal::ParseNamedEnum<Header_Type>(
       Header_Type_descriptor(), name, value);
+}
+enum Header_DataType : int {
+  Header_DataType_STRING = 0,
+  Header_DataType_ENTITY = 1,
+  Header_DataType_Header_DataType_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::min(),
+  Header_DataType_Header_DataType_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::max(),
+};
+
+bool Header_DataType_IsValid(int value);
+extern const uint32_t Header_DataType_internal_data_[];
+constexpr Header_DataType Header_DataType_DataType_MIN = static_cast<Header_DataType>(0);
+constexpr Header_DataType Header_DataType_DataType_MAX = static_cast<Header_DataType>(1);
+constexpr int Header_DataType_DataType_ARRAYSIZE = 1 + 1;
+const ::google::protobuf::EnumDescriptor*
+Header_DataType_descriptor();
+template <typename T>
+const std::string& Header_DataType_Name(T value) {
+  static_assert(std::is_same<T, Header_DataType>::value ||
+                    std::is_integral<T>::value,
+                "Incorrect type passed to DataType_Name().");
+  return Header_DataType_Name(static_cast<Header_DataType>(value));
+}
+template <>
+inline const std::string& Header_DataType_Name(Header_DataType value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<Header_DataType_descriptor,
+                                                 0, 1>(
+      static_cast<int>(value));
+}
+inline bool Header_DataType_Parse(absl::string_view name, Header_DataType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Header_DataType>(
+      Header_DataType_descriptor(), name, value);
 }
 
 // ===================================================================
@@ -243,8 +277,9 @@ class Header final : public ::google::protobuf::Message
   ::google::protobuf::Metadata GetMetadata() const;
   // nested types ----------------------------------------------------
   using Type = Header_Type;
-  static constexpr Type NONE = Header_Type_NONE;
-  static constexpr Type ENTITY = Header_Type_ENTITY;
+  static constexpr Type COMMAND = Header_Type_COMMAND;
+  static constexpr Type REQUEST = Header_Type_REQUEST;
+  static constexpr Type RESPONSE = Header_Type_RESPONSE;
   static inline bool Type_IsValid(int value) {
     return Header_Type_IsValid(value);
   }
@@ -260,6 +295,25 @@ class Header final : public ::google::protobuf::Message
   }
   static inline bool Type_Parse(absl::string_view name, Type* value) {
     return Header_Type_Parse(name, value);
+  }
+  using DataType = Header_DataType;
+  static constexpr DataType STRING = Header_DataType_STRING;
+  static constexpr DataType ENTITY = Header_DataType_ENTITY;
+  static inline bool DataType_IsValid(int value) {
+    return Header_DataType_IsValid(value);
+  }
+  static constexpr DataType DataType_MIN = Header_DataType_DataType_MIN;
+  static constexpr DataType DataType_MAX = Header_DataType_DataType_MAX;
+  static constexpr int DataType_ARRAYSIZE = Header_DataType_DataType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor* DataType_descriptor() {
+    return Header_DataType_descriptor();
+  }
+  template <typename T>
+  static inline const std::string& DataType_Name(T value) {
+    return Header_DataType_Name(value);
+  }
+  static inline bool DataType_Parse(absl::string_view name, DataType* value) {
+    return Header_DataType_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
@@ -426,6 +480,12 @@ struct is_proto_enum<::Header_Type> : std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor<::Header_Type>() {
   return ::Header_Type_descriptor();
+}
+template <>
+struct is_proto_enum<::Header_DataType> : std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor<::Header_DataType>() {
+  return ::Header_DataType_descriptor();
 }
 
 }  // namespace protobuf

@@ -37,7 +37,7 @@ class SharedMessage{
 
 class Communicator{
   public:
-  Communicator();
+  Communicator(const std::string& ip);
   void sendTest();
   private:
   std::thread coms_thread_;

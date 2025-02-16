@@ -10,8 +10,8 @@
 
 class SocketThread{
   public:
-  void operator()(SharedMessage& shared_message){
-    Client client("0.0.0.0");
+  void operator()(const std::string& ip, SharedMessage& shared_message){
+    Client client(ip.c_str());
     client.Connect();
     while(true){
       if(shared_message.hasMessage()){
@@ -24,9 +24,9 @@ class SocketThread{
   }
 };
 
-Communicator::Communicator(){
+Communicator::Communicator(const std::string& ip){
   SocketThread socket_thread;
-  coms_thread_ = std::thread(socket_thread, std::ref(shared_message_));
+  coms_thread_ = std::thread(socket_thread, ip, std::ref(shared_message_));
 }
 
 void Communicator::sendTest(){

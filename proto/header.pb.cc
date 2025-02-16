@@ -52,7 +52,7 @@ struct HeaderDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 HeaderDefaultTypeInternal _Header_default_instance_;
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_header_2eproto[1];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_header_2eproto[2];
 static constexpr const ::_pb::ServiceDescriptor**
     file_level_service_descriptors_header_2eproto = nullptr;
 const ::uint32_t
@@ -79,15 +79,16 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 const char descriptor_table_protodef_header_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\014header.proto\"P\n\006Header\022\032\n\004type\030\001 \001(\0162\014"
-    ".Header.Type\022\014\n\004data\030\002 \001(\t\"\034\n\004Type\022\010\n\004NO"
-    "NE\020\000\022\n\n\006ENTITY\020\001b\006proto3"
+    "\n\014header.proto\"\206\001\n\006Header\022\032\n\004type\030\001 \001(\0162"
+    "\014.Header.Type\022\014\n\004data\030\002 \001(\t\".\n\004Type\022\013\n\007C"
+    "OMMAND\020\000\022\013\n\007REQUEST\020\001\022\014\n\010RESPONSE\020\002\"\"\n\010D"
+    "ataType\022\n\n\006STRING\020\000\022\n\n\006ENTITY\020\001b\006proto3"
 };
 static ::absl::once_flag descriptor_table_header_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_header_2eproto = {
     false,
     false,
-    104,
+    159,
     descriptor_table_protodef_header_2eproto,
     "header.proto",
     &descriptor_table_header_2eproto_once,
@@ -105,18 +106,39 @@ const ::google::protobuf::EnumDescriptor* Header_Type_descriptor() {
   return file_level_enum_descriptors_header_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t Header_Type_internal_data_[] = {
-    131072u, 0u, };
+    196608u, 0u, };
 bool Header_Type_IsValid(int value) {
+  return 0 <= value && value <= 2;
+}
+#if (__cplusplus < 201703) && \
+  (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+
+constexpr Header_Type Header::COMMAND;
+constexpr Header_Type Header::REQUEST;
+constexpr Header_Type Header::RESPONSE;
+constexpr Header_Type Header::Type_MIN;
+constexpr Header_Type Header::Type_MAX;
+constexpr int Header::Type_ARRAYSIZE;
+
+#endif  // (__cplusplus < 201703) &&
+        // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+const ::google::protobuf::EnumDescriptor* Header_DataType_descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_header_2eproto);
+  return file_level_enum_descriptors_header_2eproto[1];
+}
+PROTOBUF_CONSTINIT const uint32_t Header_DataType_internal_data_[] = {
+    131072u, 0u, };
+bool Header_DataType_IsValid(int value) {
   return 0 <= value && value <= 1;
 }
 #if (__cplusplus < 201703) && \
   (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 
-constexpr Header_Type Header::NONE;
-constexpr Header_Type Header::ENTITY;
-constexpr Header_Type Header::Type_MIN;
-constexpr Header_Type Header::Type_MAX;
-constexpr int Header::Type_ARRAYSIZE;
+constexpr Header_DataType Header::STRING;
+constexpr Header_DataType Header::ENTITY;
+constexpr Header_DataType Header::DataType_MIN;
+constexpr Header_DataType Header::DataType_MAX;
+constexpr int Header::DataType_ARRAYSIZE;
 
 #endif  // (__cplusplus < 201703) &&
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
