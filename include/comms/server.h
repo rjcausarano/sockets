@@ -3,7 +3,7 @@
 #include <netinet/in.h>
 
 #include "socket_common.h"
-#include "../proto/header.pb.h"
+#include "header.pb.h"
 
 class Server{
 public:

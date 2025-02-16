@@ -1,2 +1,0 @@
-I've updated the protobuff messages. Make sure they work
-In the client GUI list directories from the server

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "client.h"
+#include "comms/client.h"
 
 Client::Client(const char * server_ip) : buffer_{0} {
     if ((client_fd_ = socket(AF_INET, SOCK_STREAM, PROTOCOL)) < 0) {

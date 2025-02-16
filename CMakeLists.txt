@@ -3,42 +3,39 @@ project(socket_test)
 
 set(CMAKE_CXX_COMPILER "g++")
 set(CMAKE_C_COMPILER "gcc")
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(Protobuf REQUIRED CONFIG)
 
-set(SERVER_SOURCES
-    src/server_main.cc
-    src/server.cc
-    proto/header.pb.cc
-)
+# set(PROTO_FILES ${CMAKE_CURRENT_SOURCE_DIR}/proto/comms/entity.proto)
+# protobuf_generate(
+#     LANGUAGE cpp
+#     OUT_VAR PROTO_SRCS
+#     PROTOS ${PROTO_FILES}
+#     EXPORT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/proto
+# )
 
-set(CLIENT_SOURCES
-    src/client_main.cc
-    src/client.cc
-    src/communicator.cc
-    src/header_factory.cc
-    proto/header.pb.cc
-)
-
-set(TEST_SOURCES
-    src/test.cc
-    src/header_factory.cc
-    proto/header.pb.cc
-    proto/dir_descriptor.pb.cc
-)
+execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/proto/generate_messages.sh)
 
 include_directories(${Protobuf_INCLUDE_DIRS})
 
-add_executable(server ${SERVER_SOURCES})
+file(GLOB COMM_SOURCES
+  src/comms/*.cc
+)
+
+add_library(comms SHARED ${COMM_SOURCES})
+target_include_directories(comms PRIVATE include)
+target_link_libraries(comms PUBLIC protobuf::libprotobuf)
+
+add_executable(server src/server_main.cc)
 target_include_directories(server PRIVATE include)
-target_link_libraries(server PRIVATE protobuf::libprotobuf)
+target_link_libraries(server comms)
 
-add_executable(client ${CLIENT_SOURCES})
+add_executable(client src/client_main.cc)
 target_include_directories(client PRIVATE include)
-target_link_libraries(client PRIVATE protobuf::libprotobuf)
+target_link_libraries(client comms)
 
-add_executable(test ${TEST_SOURCES})
+add_executable(test src/test.cc)
 target_include_directories(test PRIVATE include)
-target_link_libraries(test PRIVATE protobuf::libprotobuf)
+target_link_libraries(test comms)

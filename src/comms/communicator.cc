@@ -1,12 +1,12 @@
-#include "communicator.h"
+#include "comms/communicator.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <iostream>
 
-#include "client.h"
-#include "header_factory.h"
+#include "comms/client.h"
+#include "comms/header_factory.h"
 
 class SocketThread{
   public:
@@ -30,7 +30,7 @@ Communicator::Communicator(const std::string& ip){
 }
 
 void Communicator::sendTest(){
-  Header header = HeaderFactory::createHeader(Header::NONE, "Hello World");
+  Header header = HeaderFactory::createHeader(Header::COMMAND, "Hello World");
   std::string serialized;
   if(header.SerializeToString(&serialized)){
     shared_message_.setMessage(serialized);
