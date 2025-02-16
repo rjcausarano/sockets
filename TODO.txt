@@ -1,6 +1,0 @@
-There is a bug where client keeps running after server receives quit message and exits.
-
-Done Make a Header that will be sent and that contains the serialized data and the type
-Done Make a class that receives the data object type as an enum and the serialized data and automatically constructs the header
-Done Make a serializable class that describes the content of a path
-Make the mecanism of communication between client and server using these previous classes

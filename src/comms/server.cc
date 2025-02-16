@@ -1,4 +1,4 @@
-#include "server.h"
+#include "comms/server.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -45,7 +45,7 @@ Server::Server() : buffer_{0} {
 
 std::string Server::processHeader(const Header& header){
   switch(header.type()){
-    case Header::NONE:
+    case Header::COMMAND:
       return "Successfully processed NONE type header.";
       break;
     default:

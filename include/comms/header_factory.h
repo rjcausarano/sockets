@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../proto/header.pb.h"
+#include "header.pb.h"
 #include <string>
 
 class HeaderFactory {

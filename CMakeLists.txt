@@ -6,47 +6,29 @@ set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# find_package(Protobuf REQUIRED CONFIG)
-
-set(SERVER_SOURCES
-    src/server_main.cc
-    src/server.cc
-    proto/header.pb.cc
-)
-
-set(CLIENT_SOURCES
-    src/client_main.cc
-    src/client.cc
-    src/communicator.cc
-    src/header_factory.cc
-    proto/header.pb.cc
-)
-
-set(TEST_SOURCES
-    src/test.cc
-    src/header_factory.cc
-    proto/header.pb.cc
-    proto/dir_descriptor.pb.cc
-)
-
-# include_directories(${Protobuf_INCLUDE_DIRS})
+execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/proto/generate_messages.sh)
 
 include_directories(
     include
 )
 
 link_directories(
-    lib
+    libs
 )
 
-add_executable(server ${SERVER_SOURCES})
-target_include_directories(server PRIVATE include)
-target_link_libraries(server PRIVATE libprotobuf-lite.so)
+file(GLOB COMM_SOURCES
+  src/comms/*.cc
+)
 
-add_executable(client ${CLIENT_SOURCES})
-target_include_directories(client PRIVATE include)
-target_link_libraries(client PRIVATE libprotobuf-lite.so)
+add_library(comms SHARED ${COMM_SOURCES})
+set_target_properties(comms PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(comms PUBLIC libprotobuf-lite.so)
 
-add_executable(test ${TEST_SOURCES})
-target_include_directories(test PRIVATE include)
-target_link_libraries(test PRIVATE libprotobuf-lite.so)
+add_executable(server src/server_main.cc)
+target_link_libraries(server comms)
+
+add_executable(client src/client_main.cc)
+target_link_libraries(client comms)
+
+add_executable(test src/test.cc)
+target_link_libraries(test comms)

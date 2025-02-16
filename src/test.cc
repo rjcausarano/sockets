@@ -1,7 +1,7 @@
 #include <iostream>
-#include "../proto/dir_descriptor.pb.h"
-#include "../proto/header.pb.h"
-#include "header_factory.h"
+#include "comms/entity.pb.h"
+#include "comms/header.pb.h"
+#include "comms/header_factory.h"
 #include <string>
 
 int main(int argc, char const* argv[]){
@@ -17,7 +17,7 @@ int main(int argc, char const* argv[]){
 
     std::string serialized_data;
     dir.SerializeToString(&serialized_data);
-    Header header = HeaderFactory::createHeader(Header::ENTITY, serialized_data);
+    Header header = HeaderFactory::createHeader(Header::COMMAND, serialized_data);
 
     std::string serialized_header;
     header.SerializeToString(&serialized_header);
@@ -27,7 +27,7 @@ int main(int argc, char const* argv[]){
     Header server_header;
     server_header.ParseFromString(serialized_header);
 
-    if(Header::ENTITY == server_header.type()){
+    if(server_header.type() == Header::COMMAND){
         Entity server_dir;
         server_dir.ParseFromString(server_header.data());
 

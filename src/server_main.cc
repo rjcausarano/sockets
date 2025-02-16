@@ -1,4 +1,4 @@
-#include "server.h"
+#include "comms/server.h"
 
 int main(int argc, char const* argv[]){
     Server server;
