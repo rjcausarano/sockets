@@ -1,7 +1,5 @@
 #include "communicator.h"
 
-#include <mutex>
-#include <stack>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

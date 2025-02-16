@@ -1,6 +1,9 @@
 #pragma once
 
 #include <thread>
+#include <mutex>
+#include <stack>
+#include <string>
 
 class SharedMessage{
   public:
