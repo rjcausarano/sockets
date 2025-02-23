@@ -1,8 +1,9 @@
 #include "comms/server.h"
+#include "command_processor.h"
 
 int main(int argc, char const* argv[]){
-    Server server;
-    server.listenToClient();
-
-    return 0;
+  CommandProcessor commandProcessor;
+  Server server(&commandProcessor);
+  server.listenToClient();
+  return 0;
 }

@@ -26,7 +26,6 @@
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
-#include "google/protobuf/generated_enum_util.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -55,53 +54,6 @@ namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
-enum Header_Type : int {
-  Header_Type_COMMAND = 0,
-  Header_Type_REQUEST = 1,
-  Header_Type_RESPONSE = 2,
-  Header_Type_Header_Type_INT_MIN_SENTINEL_DO_NOT_USE_ =
-      std::numeric_limits<::int32_t>::min(),
-  Header_Type_Header_Type_INT_MAX_SENTINEL_DO_NOT_USE_ =
-      std::numeric_limits<::int32_t>::max(),
-};
-
-bool Header_Type_IsValid(int value);
-extern const uint32_t Header_Type_internal_data_[];
-constexpr Header_Type Header_Type_Type_MIN = static_cast<Header_Type>(0);
-constexpr Header_Type Header_Type_Type_MAX = static_cast<Header_Type>(2);
-constexpr int Header_Type_Type_ARRAYSIZE = 2 + 1;
-const std::string& Header_Type_Name(Header_Type value);
-template <typename T>
-const std::string& Header_Type_Name(T value) {
-  static_assert(std::is_same<T, Header_Type>::value ||
-                    std::is_integral<T>::value,
-                "Incorrect type passed to Type_Name().");
-  return Header_Type_Name(static_cast<Header_Type>(value));
-}
-bool Header_Type_Parse(absl::string_view name, Header_Type* value);
-enum Header_DataType : int {
-  Header_DataType_STRING = 0,
-  Header_DataType_ENTITY = 1,
-  Header_DataType_Header_DataType_INT_MIN_SENTINEL_DO_NOT_USE_ =
-      std::numeric_limits<::int32_t>::min(),
-  Header_DataType_Header_DataType_INT_MAX_SENTINEL_DO_NOT_USE_ =
-      std::numeric_limits<::int32_t>::max(),
-};
-
-bool Header_DataType_IsValid(int value);
-extern const uint32_t Header_DataType_internal_data_[];
-constexpr Header_DataType Header_DataType_DataType_MIN = static_cast<Header_DataType>(0);
-constexpr Header_DataType Header_DataType_DataType_MAX = static_cast<Header_DataType>(1);
-constexpr int Header_DataType_DataType_ARRAYSIZE = 1 + 1;
-const std::string& Header_DataType_Name(Header_DataType value);
-template <typename T>
-const std::string& Header_DataType_Name(T value) {
-  static_assert(std::is_same<T, Header_DataType>::value ||
-                    std::is_integral<T>::value,
-                "Incorrect type passed to DataType_Name().");
-  return Header_DataType_Name(static_cast<Header_DataType>(value));
-}
-bool Header_DataType_Parse(absl::string_view name, Header_DataType* value);
 
 // ===================================================================
 
@@ -238,45 +190,28 @@ class Header final : public ::google::protobuf::MessageLite
 
  public:
   // nested types ----------------------------------------------------
-  using Type = Header_Type;
-  static constexpr Type COMMAND = Header_Type_COMMAND;
-  static constexpr Type REQUEST = Header_Type_REQUEST;
-  static constexpr Type RESPONSE = Header_Type_RESPONSE;
-  static inline bool Type_IsValid(int value) {
-    return Header_Type_IsValid(value);
-  }
-  static constexpr Type Type_MIN = Header_Type_Type_MIN;
-  static constexpr Type Type_MAX = Header_Type_Type_MAX;
-  static constexpr int Type_ARRAYSIZE = Header_Type_Type_ARRAYSIZE;
-  template <typename T>
-  static inline const std::string& Type_Name(T value) {
-    return Header_Type_Name(value);
-  }
-  static inline bool Type_Parse(absl::string_view name, Type* value) {
-    return Header_Type_Parse(name, value);
-  }
-  using DataType = Header_DataType;
-  static constexpr DataType STRING = Header_DataType_STRING;
-  static constexpr DataType ENTITY = Header_DataType_ENTITY;
-  static inline bool DataType_IsValid(int value) {
-    return Header_DataType_IsValid(value);
-  }
-  static constexpr DataType DataType_MIN = Header_DataType_DataType_MIN;
-  static constexpr DataType DataType_MAX = Header_DataType_DataType_MAX;
-  static constexpr int DataType_ARRAYSIZE = Header_DataType_DataType_ARRAYSIZE;
-  template <typename T>
-  static inline const std::string& DataType_Name(T value) {
-    return Header_DataType_Name(value);
-  }
-  static inline bool DataType_Parse(absl::string_view name, DataType* value) {
-    return Header_DataType_Parse(name, value);
-  }
 
   // accessors -------------------------------------------------------
   enum : int {
-    kDataFieldNumber = 2,
     kTypeFieldNumber = 1,
+    kDataFieldNumber = 2,
   };
+  // string type = 1;
+  void clear_type() ;
+  const std::string& type() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_type(Arg_&& arg, Args_... args);
+  std::string* mutable_type();
+  PROTOBUF_NODISCARD std::string* release_type();
+  void set_allocated_type(std::string* value);
+
+  private:
+  const std::string& _internal_type() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_type(
+      const std::string& value);
+  std::string* _internal_mutable_type();
+
+  public:
   // string data = 2;
   void clear_data() ;
   const std::string& data() const;
@@ -293,23 +228,13 @@ class Header final : public ::google::protobuf::MessageLite
   std::string* _internal_mutable_data();
 
   public:
-  // .Header.Type type = 1;
-  void clear_type() ;
-  ::Header_Type type() const;
-  void set_type(::Header_Type value);
-
-  private:
-  ::Header_Type _internal_type() const;
-  void _internal_set_type(::Header_Type value);
-
-  public:
   // @@protoc_insertion_point(class_scope:Header)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       1, 2, 0,
-      19, 2>
+      23, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -326,8 +251,8 @@ class Header final : public ::google::protobuf::MessageLite
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const Header& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr type_;
     ::google::protobuf::internal::ArenaStringPtr data_;
-    int type_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -351,26 +276,52 @@ class Header final : public ::google::protobuf::MessageLite
 
 // Header
 
-// .Header.Type type = 1;
+// string type = 1;
 inline void Header::clear_type() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.type_ = 0;
+  _impl_.type_.ClearToEmpty();
 }
-inline ::Header_Type Header::type() const {
+inline const std::string& Header::type() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:Header.type)
   return _internal_type();
 }
-inline void Header::set_type(::Header_Type value) {
-  _internal_set_type(value);
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void Header::set_type(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.type_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
   // @@protoc_insertion_point(field_set:Header.type)
 }
-inline ::Header_Type Header::_internal_type() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return static_cast<::Header_Type>(_impl_.type_);
+inline std::string* Header::mutable_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_type();
+  // @@protoc_insertion_point(field_mutable:Header.type)
+  return _s;
 }
-inline void Header::_internal_set_type(::Header_Type value) {
+inline const std::string& Header::_internal_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.type_.Get();
+}
+inline void Header::_internal_set_type(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.type_ = value;
+  _impl_.type_.Set(value, GetArena());
+}
+inline std::string* Header::_internal_mutable_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.type_.Mutable( GetArena());
+}
+inline std::string* Header::release_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:Header.type)
+  return _impl_.type_.Release();
+}
+inline void Header::set_allocated_type(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.type_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.type_.IsDefault()) {
+    _impl_.type_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:Header.type)
 }
 
 // string data = 2;
@@ -427,17 +378,6 @@ inline void Header::set_allocated_data(std::string* value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-
-namespace google {
-namespace protobuf {
-
-template <>
-struct is_proto_enum<::Header_Type> : std::true_type {};
-template <>
-struct is_proto_enum<::Header_DataType> : std::true_type {};
-
-}  // namespace protobuf
-}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 
