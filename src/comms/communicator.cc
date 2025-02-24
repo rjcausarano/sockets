@@ -8,8 +8,10 @@
 #include "comms/header_factory.h"
 #include "comms/entity.pb.h"
 
-Communicator::Communicator(const std::string& ip) : client_{ip.c_str()} {
-  client_.Connect();
+Communicator::Communicator() {}
+
+void Communicator::connect(const std::string& ip){
+  client_.Connect(ip.c_str());
 }
 
 Entity Communicator::getDirTree(const std::string& path) {

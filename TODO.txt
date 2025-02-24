@@ -1,4 +1,0 @@
-header contains string type and string data Done
-string type is programatically generated Done
-the server class passes the string type and string data to the interface of header processor and returns the header to the client
-command processor implements header processor and deserializes its data and returns a response header

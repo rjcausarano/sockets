@@ -6,9 +6,9 @@
 
 class Client{
 public:
-    Client(const char * server_ip);
+    Client();
     ~Client();
-    void Connect();
+    void Connect(const char * server_ip);
     std::string Send(const char* msg);
 
 private:
