@@ -19,9 +19,3 @@ file(GLOB COMM_SOURCES
 add_library(comms SHARED ${COMM_SOURCES})
 set_target_properties(comms PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(comms PUBLIC protobuf::libprotobuf-lite)
-
-add_executable(server src/server_main.cc src/command_processor.cc)
-target_link_libraries(server comms)
-
-add_executable(client src/client_main.cc)
-target_link_libraries(client comms)

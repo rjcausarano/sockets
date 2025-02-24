@@ -30,7 +30,7 @@ void Client::Connect(){
     }
 }
 
-std::string Client::Send(const char* msg){
+std::string Client::Send(const char* msg) {
     send(client_fd_, msg, strlen(msg) + 1, 0);
     ssize_t bytes = read(client_fd_, buffer_, BUFFER_SIZE - 1);
     return std::string(buffer_);

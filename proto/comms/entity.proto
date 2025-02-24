@@ -1,5 +1,9 @@
 syntax = "proto3";
 
+message EntityRequest {
+  string path = 1;
+}
+
 message Entity {
 
   enum Type {
