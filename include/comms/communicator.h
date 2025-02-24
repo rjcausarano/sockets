@@ -3,6 +3,7 @@
 #include "shared_message.h"
 #include <thread>
 #include <string>
+#include "comms/header.pb.h"
 #include "comms/client.h"
 #include "comms/entity.pb.h"
 
@@ -20,6 +21,7 @@ class Communicator {
   // async send test
   // void sendTest();
   private:
+  Header sendHeader(Header header);
   Client client_;
   // async properties
   // std::thread coms_thread_;
