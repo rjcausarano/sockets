@@ -29,3 +29,6 @@ target_link_libraries(comms PUBLIC protobuf::libprotobuf-lite)
 
 add_executable(server test/server_main.cc ${TEST_FILES} ${COMM_SOURCES})
 target_link_libraries(server comms)
+
+add_executable(test test/test.cc ${TEST_FILES} ${COMM_SOURCES})
+target_link_libraries(test comms)

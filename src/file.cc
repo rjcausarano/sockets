@@ -9,7 +9,9 @@
 
 File::File(const std::string& path) {
   assert_existance(path);
-  path_ = std::string(realpath(path.c_str(), nullptr));
+  char* resolvedPath = realpath(path.c_str(), nullptr);
+  path_ = std::string(resolvedPath);
+  free(resolvedPath);
   char c_path[256];
   strcpy(c_path, path_.c_str());
   name_ = basename(c_path);
@@ -20,6 +22,11 @@ File::~File(){}
 std::string File::getName() const{
   assert_existance(path_);
   return name_;
+}
+
+std::string File::getPath() const {
+  assert_existance(path_);
+  return path_;
 }
 
 stringvec File::list() const{
@@ -77,6 +84,33 @@ void File::del(){
     rmdir(path_.c_str());
   } else {
     remove(path_.c_str());
+  }
+}
+
+void File::move(const std::string& path){
+  assert_existance(path_);
+  assert_existance(path);
+  char* resolvedPath = realpath(path.c_str(), nullptr);
+  std::string newPath(std::string(resolvedPath) + "/" + name_);
+  free(resolvedPath);
+  if((std::rename(path_.c_str(), newPath.c_str()) == 0)){
+    path_ = newPath;
+  } else{
+    std::perror("Unable to move file");
+    throw std::runtime_error("Unable to move file: " + path_);
+  }
+}
+
+void File::rename(const std::string& name){
+  assert_existance(path_);
+  std::string pathCopy = path_;
+  std::string newPath(std::string(dirname(pathCopy.data())) + "/" + name);
+  if((std::rename(path_.c_str(), newPath.c_str()) == 0)){
+    path_ = newPath;
+    name_ = name;
+  } else{
+    std::perror("Unable to rename file");
+    throw std::runtime_error("Unable to rename file: " + path_);
   }
 }
 
