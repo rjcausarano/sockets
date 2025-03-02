@@ -1,13 +1,13 @@
 #include <iostream>
 #include "file.h"
-#include <sys/inotify.h>
+#include "file_observer.h"
 
 int main(){
-  File file("./renamed.txt");
-  std::cout << "The file path is: " << file.getPath() << std::endl;
-  std::cout << "The file name is: " << file.getName() << std::endl;
-  file.move("..");
-  std::cout << "The file path is: " << file.getPath() << std::endl;
-  std::cout << "The file name is: " << file.getName() << std::endl;
+  FileObserver observer;
+  const FilePtr& file1 = File::create("../testdir/file1.txt", observer);
+  const FilePtr& file2 = File::create("../testdir/file2.txt", observer);
+  const FilePtr& file3 = File::create("../testdir/file3.txt", observer);
+
+  observer.listNames();
   return 0;
 }

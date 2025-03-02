@@ -1,9 +1,9 @@
 #include "entity_processor.h"
 #include <iostream>
 
-EntityProcessor::EntityProcessor(const File& file) {
-  entity_.set_name(file.getName());
-  entity_.set_type(file.isDir() ? Entity::DIRECTORY : Entity::FILE);
+EntityProcessor::EntityProcessor(const FilePtr& file) {
+  entity_.set_name(file->getName());
+  entity_.set_type(file->isDir() ? Entity::DIRECTORY : Entity::FILE);
   createNestedEntity(file, &entity_);
 }
 
@@ -17,11 +17,11 @@ Entity EntityProcessor::getEntity() const{
   return entity_;
 }
 
-void EntityProcessor::createNestedEntity(File parentFile, Entity* parentEntity) const{
-  for(File childFile : parentFile.children()){
+void EntityProcessor::createNestedEntity(const FilePtr& parentFile, Entity* parentEntity) const{
+  for(const FilePtr& childFile : parentFile->children()){
     Entity* childEntity = parentEntity->add_entities();
-    childEntity->set_name(childFile.getName());
-    if(childFile.isDir()){
+    childEntity->set_name(childFile->getName());
+    if(childFile->isDir()){
       childEntity->set_type(Entity::DIRECTORY);
     } else{
       childEntity->set_type(Entity::FILE);

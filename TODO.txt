@@ -1,0 +1,2 @@
+observer owns all File instances
+observer will call a onChange(const FilePtr&, ChangeType) function that was binded to it when any of its holding files change.

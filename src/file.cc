@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <cstdio>
 #include <cstdlib>
+#include "file_observer.h"
 
 File::File(const std::string& path) {
   assert_existance(path);
@@ -17,7 +18,13 @@ File::File(const std::string& path) {
   name_ = basename(c_path);
 }
 
-File::~File(){}
+FilePtr File::create(const std::string& path) {
+  return FilePtr(new File(path));
+}
+
+const FilePtr& File::create(const std::string& path, FileObserver& observer){
+  return observer.append(File::create(path));
+}
 
 std::string File::getName() const{
   assert_existance(path_);
@@ -50,7 +57,7 @@ filevec File::children() const{
   assert_existance(path_);
   filevec children;
   for(std::string filename : list()){
-    children.emplace_back(File(path_ + "/" + filename));
+    children.emplace_back(create(path_ + "/" + filename));
   }
   return children;
 }
