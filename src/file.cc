@@ -26,14 +26,28 @@ const FilePtr& File::create(const std::string& path, FileObserver& observer){
   return observer.append(File::create(path));
 }
 
-std::string File::getName() const{
+const std::string& File::getName() const{
   assert_existance(path_);
   return name_;
 }
 
-std::string File::getPath() const {
+const std::string& File::getPath() const {
   assert_existance(path_);
   return path_;
+}
+
+const off_t File::getSize() const {
+  assert_existance(path_);
+  struct stat info;
+  stat(path_.c_str(), &info);
+  return info.st_size;
+}
+
+const mode_t File::getPermissions() const {
+  assert_existance(path_);
+  struct stat info;
+  stat(path_.c_str(), &info);
+  return info.st_mode;
 }
 
 stringvec File::list() const{
@@ -53,7 +67,7 @@ stringvec File::list() const{
   return items;
 }
 
-filevec File::children() const{
+filevec File::children() const {
   assert_existance(path_);
   filevec children;
   for(std::string filename : list()){
@@ -62,7 +76,7 @@ filevec File::children() const{
   return children;
 }
 
-bool File::isDir() const{
+bool File::isDir() const {
   assert_existance(path_);
   struct stat info;
   stat(path_.c_str(), &info);

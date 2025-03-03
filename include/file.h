@@ -16,8 +16,10 @@ class File {
 public:
   static FilePtr create(const std::string& path);
   static const FilePtr& create(const std::string& path, FileObserver& observer);
-  std::string getName() const;
-  std::string getPath() const;
+  const std::string& getName() const;
+  const std::string& getPath() const;
+  const off_t getSize() const;
+  const mode_t getPermissions() const;
   filevec children() const;
   bool isDir() const;
   bool isEmptyDir() const;
