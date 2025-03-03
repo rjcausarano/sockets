@@ -1,7 +1,19 @@
 #include "file_observer.h"
 #include <iostream>
+#include <unistd.h>
 
-FileObserver::FileObserver(void (*onChange)(std::string message)) : onChange_{onChange} {}
+ObserverTask::ObserverTask(FileObserver* observer) : observer_{observer} {}
+
+void ObserverTask::operator()(){
+  while(true){
+    sleep(1);
+    observer_->observe();
+  }
+}
+
+FileObserver::FileObserver(void (*onChange)(std::string message)) : onChange_{onChange} {
+  observerThread_ = std::thread(ObserverTask(this));
+}
 
 const FilePtr& FileObserver::append(FilePtr&& file){
   files_.emplace_back(std::move(file), file->getName(), file->getSize(), file->getPermissions());

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <unistd.h>
 #include "file.h"
 #include "file_observer.h"
 
@@ -15,9 +14,8 @@ int main(){
   const FilePtr& file3 = File::create("../testdir/file3.txt", observer);
 
   observer.listNames();
-  while(true){
-    sleep(1);
-    observer.observe();
-  }
+
+  std::string input;
+  std::cin >> input;
   return 0;
 }
