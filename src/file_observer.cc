@@ -11,7 +11,7 @@ void ObserverTask::operator()(){
   }
 }
 
-FileObserver::FileObserver(void (*onChange)(std::string message)) : onChange_{onChange} {
+FileObserver::FileObserver(void (*onChange)(FileChangeEvent event)) : onChange_{onChange} {
   observerThread_ = std::thread(ObserverTask(this));
 }
 
@@ -27,16 +27,19 @@ void FileObserver::observe(){
     off_t& fileSize = std::get<2>(fileProps);
     mode_t& filePermissions = std::get<3>(fileProps);
     if(filePtr->getName() != fileName){
-      onChange_("File name has changed!");
       fileName = filePtr->getName();
+      FileChangeEvent event(FileChangeEvent::Type::NAME, &fileName);
+      onChange_(event);
     }
     if(filePtr->getSize() != fileSize){
-      onChange_("File size has changed!");
       fileSize = filePtr->getSize();
+      FileChangeEvent event(FileChangeEvent::Type::SIZE, &fileSize);
+      onChange_(event);
     }
     if(filePtr->getPermissions() != filePermissions){
-      onChange_("File permissions has changed!");
       filePermissions = filePtr->getPermissions();
+      FileChangeEvent event(FileChangeEvent::Type::PERMISSIONS, &filePermissions);
+      onChange_(event);
     }
   }
 }

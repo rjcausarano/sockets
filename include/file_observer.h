@@ -1,6 +1,7 @@
 #pragma once
 
 #include "file.h"
+#include "file_change_event.h"
 #include <list>
 #include <tuple>
 #include <string>
@@ -19,12 +20,12 @@ class ObserverTask{
 
 class FileObserver{
   public:
-  FileObserver(void (*onChange)(std::string message));
+  FileObserver(void (*onChange)(FileChangeEvent event));
   const FilePtr& append(FilePtr&& file);
   void listNames();
   void observe();
   private:
   FilePropsArray files_;
-  void (*onChange_)(std::string message);
+  void (*onChange_)(FileChangeEvent event);
   std::thread observerThread_;
 };
