@@ -13,6 +13,7 @@ class FileObserver{
   FileObserver(void (*onChange)(std::string message));
   const FilePtr& append(FilePtr&& file);
   void listNames();
+  void observe();
   private:
   FilePropsArray files_;
   void (*onChange_)(std::string message);
