@@ -7,7 +7,30 @@ ObserverTask::ObserverTask(FileObserver* observer) : observer_{observer} {}
 void ObserverTask::operator()(){
   while(true){
     sleep(1);
-    observer_->observe();
+
+    for(FileProps& fileProps : observer_->files_){
+      const FilePtr& filePtr = std::get<0>(fileProps);
+      std::string& fileName = std::get<1>(fileProps);
+      off_t& fileSize = std::get<2>(fileProps);
+      mode_t& filePermissions = std::get<3>(fileProps);
+      filePtr->checkRenamed();
+      if(filePtr->getName() != fileName){
+        fileName = filePtr->getName();
+        FileChangeEvent event(FileChangeEvent::Type::NAME, &fileName);
+        observer_->onChange_(event);
+      }
+      if(filePtr->getSize() != fileSize){
+        fileSize = filePtr->getSize();
+        FileChangeEvent event(FileChangeEvent::Type::SIZE, &fileSize);
+        observer_->onChange_(event);
+      }
+      if(filePtr->getPermissions() != filePermissions){
+        filePermissions = filePtr->getPermissions();
+        FileChangeEvent event(FileChangeEvent::Type::PERMISSIONS, &filePermissions);
+        observer_->onChange_(event);
+      }
+    }
+
   }
 }
 
@@ -15,33 +38,13 @@ FileObserver::FileObserver(void (*onChange)(FileChangeEvent event)) : onChange_{
   observerThread_ = std::thread(ObserverTask(this));
 }
 
-const FilePtr& FileObserver::append(FilePtr&& file){
-  files_.emplace_back(std::move(file), file->getName(), file->getSize(), file->getPermissions());
-  return std::get<0>(files_.back());
-}
-
-void FileObserver::observe(){
-  for(FileProps& fileProps : files_){
-    const FilePtr& filePtr = std::get<0>(fileProps);
-    std::string& fileName = std::get<1>(fileProps);
-    off_t& fileSize = std::get<2>(fileProps);
-    mode_t& filePermissions = std::get<3>(fileProps);
-    if(filePtr->getName() != fileName){
-      fileName = filePtr->getName();
-      FileChangeEvent event(FileChangeEvent::Type::NAME, &fileName);
-      onChange_(event);
-    }
-    if(filePtr->getSize() != fileSize){
-      fileSize = filePtr->getSize();
-      FileChangeEvent event(FileChangeEvent::Type::SIZE, &fileSize);
-      onChange_(event);
-    }
-    if(filePtr->getPermissions() != filePermissions){
-      filePermissions = filePtr->getPermissions();
-      FileChangeEvent event(FileChangeEvent::Type::PERMISSIONS, &filePermissions);
-      onChange_(event);
-    }
-  }
+const FilePtr& FileObserver::append(FilePtr& file){
+  std::string name = file->getName();
+  off_t size = file->getSize();
+  mode_t permissions = file->getPermissions();
+  files_.emplace_back(std::move(file), name, size, permissions);
+  const FilePtr& ptr = std::get<0>(files_.back());
+  return ptr;
 }
 
 void FileObserver::listNames(){

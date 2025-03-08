@@ -20,10 +20,10 @@ class ObserverTask{
 
 class FileObserver{
   public:
+  friend class ObserverTask;
   FileObserver(void (*onChange)(FileChangeEvent event));
-  const FilePtr& append(FilePtr&& file);
+  const FilePtr& append(FilePtr& file);
   void listNames();
-  void observe();
   private:
   FilePropsArray files_;
   void (*onChange_)(FileChangeEvent event);

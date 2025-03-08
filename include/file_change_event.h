@@ -7,22 +7,18 @@ class FileChangeEvent {
     SIZE,
     PERMISSIONS
   };
+  
+  template<typename T>
+  FileChangeEvent(Type type, T* value);
+
+  Type getType();
 
   template<typename T>
-  FileChangeEvent(Type type, T* value) : type_{type} {
-    new_value_ = static_cast<void*>(value);
-  }
-
-  Type getType() {
-    return type_;
-  }
-
-  template<typename T>
-  T& getValue(){
-    return *static_cast<T*>(new_value_);
-  }
+  T& getValue();
 
   private:
   Type type_;
   void* new_value_;
 };
+
+#include "file_change_event.ipp"
