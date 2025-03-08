@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <cstdio>
 #include <cstdlib>
+#include <algorithm>
 #include "file_observer.h"
 
 File::File(const std::string& path) : path_check_enabled_{true} {
