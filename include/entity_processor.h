@@ -14,7 +14,8 @@ class EntityProcessor{
   void printDescription() const;
 	
 	private:
-  void createNestedEntity(const FilePtr& parentFile, Entity* parentEntity) const;
+  void createEntityWithChildren(const FilePtr& file);
+  void createNestedEntity(const FilePtr& parentFile, Entity* parentEntity, int depth) const;
   void printNestedEntity(const Entity& entity, int depth = 0) const;
   Entity entity_;
 };

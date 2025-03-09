@@ -14,8 +14,8 @@ void Communicator::connect(const std::string& ip){
   client_.Connect(ip.c_str());
 }
 
-Entity Communicator::getDirTree(const std::string& path) {
-  EntityRequest req;
+Entity Communicator::getDirChildren(const std::string& path) {
+  EntityChildrenRequest req;
   req.set_path(path);
   Header respHeader = sendHeader(HeaderFactory::createHeader(req));
   Entity entity;

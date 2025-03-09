@@ -4,7 +4,7 @@
 EntityProcessor::EntityProcessor(const FilePtr& file) {
   entity_.set_name(file->getName());
   entity_.set_type(file->isDir() ? Entity::DIRECTORY : Entity::FILE);
-  createNestedEntity(file, &entity_);
+  createNestedEntity(file, &entity_, 2);
 }
 
 EntityProcessor::EntityProcessor(const Entity& entity) : entity_{entity} {}
@@ -17,7 +17,21 @@ Entity EntityProcessor::getEntity() const{
   return entity_;
 }
 
-void EntityProcessor::createNestedEntity(const FilePtr& parentFile, Entity* parentEntity) const{
+void EntityProcessor::createEntityWithChildren(const FilePtr& file) {
+  for(const FilePtr& childFile : file->children()){
+    Entity* childEntity = entity_.add_entities();
+    childEntity->set_name(childFile->getName());
+    if(childFile->isDir()){
+      childEntity->set_type(Entity::DIRECTORY);
+    } else{
+      childEntity->set_type(Entity::FILE);
+    }
+  }
+  return;
+}
+
+void EntityProcessor::createNestedEntity(const FilePtr& parentFile, Entity* parentEntity, int depth) const {
+  depth--;
   for(const FilePtr& childFile : parentFile->children()){
     Entity* childEntity = parentEntity->add_entities();
     childEntity->set_name(childFile->getName());
@@ -26,7 +40,10 @@ void EntityProcessor::createNestedEntity(const FilePtr& parentFile, Entity* pare
     } else{
       childEntity->set_type(Entity::FILE);
     }
-    createNestedEntity(childFile, childEntity);
+
+    if(depth > 0) {
+      createNestedEntity(childFile, childEntity, depth);
+    }
   }
   return;
 }

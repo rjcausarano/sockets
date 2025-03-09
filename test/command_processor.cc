@@ -8,8 +8,8 @@ CommandProcessor::CommandProcessor() : HeaderProcessor() {}
 
 Header CommandProcessor::process(std::string type, std::string data) const {
   Header responseHeader;
-  if(type == common::getClassName<EntityRequest>()){
-    EntityRequest req;
+  if(type == common::getClassName<EntityChildrenRequest>()){
+    EntityChildrenRequest req;
     req.ParseFromString(data);
     FilePtr file = File::create(req.path());
     EntityProcessor processor(file);

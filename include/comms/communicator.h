@@ -16,7 +16,7 @@ class Communicator {
   public:
   Communicator();
   void connect(const std::string& ip);
-  Entity getDirTree(const std::string& path);
+  Entity getDirChildren(const std::string& path);
   // async constructor
   // Communicator(const std::string& ip, SocketThread* socket_thread);
   // async send test

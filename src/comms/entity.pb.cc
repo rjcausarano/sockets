@@ -22,7 +22,7 @@ namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 
-inline constexpr EntityRequest::Impl_::Impl_(
+inline constexpr EntityChildrenRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : path_(
             &::google::protobuf::internal::fixed_address_empty_string,
@@ -30,7 +30,7 @@ inline constexpr EntityRequest::Impl_::Impl_(
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR EntityRequest::EntityRequest(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR EntityChildrenRequest::EntityChildrenRequest(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::MessageLite(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -38,16 +38,16 @@ PROTOBUF_CONSTEXPR EntityRequest::EntityRequest(::_pbi::ConstantInitialized)
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct EntityRequestDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR EntityRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~EntityRequestDefaultTypeInternal() {}
+struct EntityChildrenRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR EntityChildrenRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~EntityChildrenRequestDefaultTypeInternal() {}
   union {
-    EntityRequest _instance;
+    EntityChildrenRequest _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EntityRequestDefaultTypeInternal _EntityRequest_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EntityChildrenRequestDefaultTypeInternal _EntityChildrenRequest_default_instance_;
 
 inline constexpr Entity::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -137,95 +137,95 @@ constexpr int Entity::Type_ARRAYSIZE;
         // (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 // ===================================================================
 
-class EntityRequest::_Internal {
+class EntityChildrenRequest::_Internal {
  public:
 };
 
-EntityRequest::EntityRequest(::google::protobuf::Arena* arena)
+EntityChildrenRequest::EntityChildrenRequest(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::MessageLite(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::MessageLite(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:EntityRequest)
+  // @@protoc_insertion_point(arena_constructor:EntityChildrenRequest)
 }
-inline PROTOBUF_NDEBUG_INLINE EntityRequest::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE EntityChildrenRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::EntityRequest& from_msg)
+    const Impl_& from, const ::EntityChildrenRequest& from_msg)
       : path_(arena, from.path_),
         _cached_size_{0} {}
 
-EntityRequest::EntityRequest(
+EntityChildrenRequest::EntityChildrenRequest(
     ::google::protobuf::Arena* arena,
-    const EntityRequest& from)
+    const EntityChildrenRequest& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::MessageLite(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::MessageLite(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  EntityRequest* const _this = this;
+  EntityChildrenRequest* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<std::string>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
-  // @@protoc_insertion_point(copy_constructor:EntityRequest)
+  // @@protoc_insertion_point(copy_constructor:EntityChildrenRequest)
 }
-inline PROTOBUF_NDEBUG_INLINE EntityRequest::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE EntityChildrenRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : path_(arena),
         _cached_size_{0} {}
 
-inline void EntityRequest::SharedCtor(::_pb::Arena* arena) {
+inline void EntityChildrenRequest::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
-EntityRequest::~EntityRequest() {
-  // @@protoc_insertion_point(destructor:EntityRequest)
+EntityChildrenRequest::~EntityChildrenRequest() {
+  // @@protoc_insertion_point(destructor:EntityChildrenRequest)
   SharedDtor(*this);
 }
-inline void EntityRequest::SharedDtor(MessageLite& self) {
-  EntityRequest& this_ = static_cast<EntityRequest&>(self);
+inline void EntityChildrenRequest::SharedDtor(MessageLite& self) {
+  EntityChildrenRequest& this_ = static_cast<EntityChildrenRequest&>(self);
   this_._internal_metadata_.Delete<std::string>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.path_.Destroy();
   this_._impl_.~Impl_();
 }
 
-inline void* EntityRequest::PlacementNew_(const void*, void* mem,
+inline void* EntityChildrenRequest::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) EntityRequest(arena);
+  return ::new (mem) EntityChildrenRequest(arena);
 }
-constexpr auto EntityRequest::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(EntityRequest),
-                                            alignof(EntityRequest));
+constexpr auto EntityChildrenRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(EntityChildrenRequest),
+                                            alignof(EntityChildrenRequest));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataLite<14> EntityRequest::_class_data_ = {
+const ::google::protobuf::internal::ClassDataLite<22> EntityChildrenRequest::_class_data_ = {
     {
-        &_EntityRequest_default_instance_._instance,
+        &_EntityChildrenRequest_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &EntityRequest::MergeImpl,
-        ::google::protobuf::MessageLite::GetNewImpl<EntityRequest>(),
+        &EntityChildrenRequest::MergeImpl,
+        ::google::protobuf::MessageLite::GetNewImpl<EntityChildrenRequest>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &EntityRequest::SharedDtor,
-        ::google::protobuf::MessageLite::GetClearImpl<EntityRequest>(), &EntityRequest::ByteSizeLong,
-            &EntityRequest::_InternalSerialize,
+        &EntityChildrenRequest::SharedDtor,
+        ::google::protobuf::MessageLite::GetClearImpl<EntityChildrenRequest>(), &EntityChildrenRequest::ByteSizeLong,
+            &EntityChildrenRequest::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(EntityRequest, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(EntityChildrenRequest, _impl_._cached_size_),
         true,
     },
-    "EntityRequest",
+    "EntityChildrenRequest",
 };
-const ::google::protobuf::internal::ClassData* EntityRequest::GetClassData() const {
+const ::google::protobuf::internal::ClassData* EntityChildrenRequest::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 26, 2> EntityRequest::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 34, 2> EntityChildrenRequest::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -240,29 +240,29 @@ const ::_pbi::TcParseTable<0, 1, 0, 26, 2> EntityRequest::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallbackLite,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::EntityRequest>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::EntityChildrenRequest>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // string path = 1;
     {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(EntityRequest, _impl_.path_)}},
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(EntityChildrenRequest, _impl_.path_)}},
   }}, {{
     65535, 65535
   }}, {{
     // string path = 1;
-    {PROTOBUF_FIELD_OFFSET(EntityRequest, _impl_.path_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(EntityChildrenRequest, _impl_.path_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\15\4\0\0\0\0\0\0"
-    "EntityRequest"
+    "\25\4\0\0\0\0\0\0"
+    "EntityChildrenRequest"
     "path"
   }},
 };
 
-PROTOBUF_NOINLINE void EntityRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:EntityRequest)
+PROTOBUF_NOINLINE void EntityChildrenRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:EntityChildrenRequest)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -273,17 +273,17 @@ PROTOBUF_NOINLINE void EntityRequest::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* EntityRequest::_InternalSerialize(
+        ::uint8_t* EntityChildrenRequest::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const EntityRequest& this_ = static_cast<const EntityRequest&>(base);
+          const EntityChildrenRequest& this_ = static_cast<const EntityChildrenRequest&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* EntityRequest::_InternalSerialize(
+        ::uint8_t* EntityChildrenRequest::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const EntityRequest& this_ = *this;
+          const EntityChildrenRequest& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:EntityRequest)
+          // @@protoc_insertion_point(serialize_to_array_start:EntityChildrenRequest)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -291,7 +291,7 @@ PROTOBUF_NOINLINE void EntityRequest::Clear() {
           if (!this_._internal_path().empty()) {
             const std::string& _s = this_._internal_path();
             ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "EntityRequest.path");
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "EntityChildrenRequest.path");
             target = stream->WriteStringMaybeAliased(1, _s, target);
           }
 
@@ -300,18 +300,18 @@ PROTOBUF_NOINLINE void EntityRequest::Clear() {
                 this_._internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString).data(),
                 static_cast<int>(this_._internal_metadata_.unknown_fields<std::string>(::google::protobuf::internal::GetEmptyString).size()), target);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:EntityRequest)
+          // @@protoc_insertion_point(serialize_to_array_end:EntityChildrenRequest)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t EntityRequest::ByteSizeLong(const MessageLite& base) {
-          const EntityRequest& this_ = static_cast<const EntityRequest&>(base);
+        ::size_t EntityChildrenRequest::ByteSizeLong(const MessageLite& base) {
+          const EntityChildrenRequest& this_ = static_cast<const EntityChildrenRequest&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t EntityRequest::ByteSizeLong() const {
-          const EntityRequest& this_ = *this;
+        ::size_t EntityChildrenRequest::ByteSizeLong() const {
+          const EntityChildrenRequest& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:EntityRequest)
+          // @@protoc_insertion_point(message_byte_size_start:EntityChildrenRequest)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -332,10 +332,10 @@ PROTOBUF_NOINLINE void EntityRequest::Clear() {
           return total_size;
         }
 
-void EntityRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<EntityRequest*>(&to_msg);
-  auto& from = static_cast<const EntityRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:EntityRequest)
+void EntityChildrenRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<EntityChildrenRequest*>(&to_msg);
+  auto& from = static_cast<const EntityChildrenRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:EntityChildrenRequest)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -346,15 +346,15 @@ void EntityRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::g
   _this->_internal_metadata_.MergeFrom<std::string>(from._internal_metadata_);
 }
 
-void EntityRequest::CopyFrom(const EntityRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:EntityRequest)
+void EntityChildrenRequest::CopyFrom(const EntityChildrenRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:EntityChildrenRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void EntityRequest::InternalSwap(EntityRequest* PROTOBUF_RESTRICT other) {
+void EntityChildrenRequest::InternalSwap(EntityChildrenRequest* PROTOBUF_RESTRICT other) {
   using std::swap;
   auto* arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());

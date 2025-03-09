@@ -50,9 +50,9 @@ struct TableStruct_comms_2fentity_2eproto {
 class Entity;
 struct EntityDefaultTypeInternal;
 extern EntityDefaultTypeInternal _Entity_default_instance_;
-class EntityRequest;
-struct EntityRequestDefaultTypeInternal;
-extern EntityRequestDefaultTypeInternal _EntityRequest_default_instance_;
+class EntityChildrenRequest;
+struct EntityChildrenRequestDefaultTypeInternal;
+extern EntityChildrenRequestDefaultTypeInternal _EntityChildrenRequest_default_instance_;
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
@@ -87,31 +87,31 @@ bool Entity_Type_Parse(absl::string_view name, Entity_Type* value);
 
 // -------------------------------------------------------------------
 
-class EntityRequest final : public ::google::protobuf::MessageLite
-/* @@protoc_insertion_point(class_definition:EntityRequest) */ {
+class EntityChildrenRequest final : public ::google::protobuf::MessageLite
+/* @@protoc_insertion_point(class_definition:EntityChildrenRequest) */ {
  public:
-  inline EntityRequest() : EntityRequest(nullptr) {}
-  ~EntityRequest() PROTOBUF_FINAL;
+  inline EntityChildrenRequest() : EntityChildrenRequest(nullptr) {}
+  ~EntityChildrenRequest() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(EntityRequest* msg, std::destroying_delete_t) {
+  void operator delete(EntityChildrenRequest* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(EntityRequest));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(EntityChildrenRequest));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR EntityRequest(
+  explicit PROTOBUF_CONSTEXPR EntityChildrenRequest(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline EntityRequest(const EntityRequest& from) : EntityRequest(nullptr, from) {}
-  inline EntityRequest(EntityRequest&& from) noexcept
-      : EntityRequest(nullptr, std::move(from)) {}
-  inline EntityRequest& operator=(const EntityRequest& from) {
+  inline EntityChildrenRequest(const EntityChildrenRequest& from) : EntityChildrenRequest(nullptr, from) {}
+  inline EntityChildrenRequest(EntityChildrenRequest&& from) noexcept
+      : EntityChildrenRequest(nullptr, std::move(from)) {}
+  inline EntityChildrenRequest& operator=(const EntityChildrenRequest& from) {
     CopyFrom(from);
     return *this;
   }
-  inline EntityRequest& operator=(EntityRequest&& from) noexcept {
+  inline EntityChildrenRequest& operator=(EntityChildrenRequest&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -130,16 +130,16 @@ class EntityRequest final : public ::google::protobuf::MessageLite
     return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
-  static const EntityRequest& default_instance() {
+  static const EntityChildrenRequest& default_instance() {
     return *internal_default_instance();
   }
-  static inline const EntityRequest* internal_default_instance() {
-    return reinterpret_cast<const EntityRequest*>(
-        &_EntityRequest_default_instance_);
+  static inline const EntityChildrenRequest* internal_default_instance() {
+    return reinterpret_cast<const EntityChildrenRequest*>(
+        &_EntityChildrenRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 0;
-  friend void swap(EntityRequest& a, EntityRequest& b) { a.Swap(&b); }
-  inline void Swap(EntityRequest* other) {
+  friend void swap(EntityChildrenRequest& a, EntityChildrenRequest& b) { a.Swap(&b); }
+  inline void Swap(EntityChildrenRequest* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -147,7 +147,7 @@ class EntityRequest final : public ::google::protobuf::MessageLite
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(EntityRequest* other) {
+  void UnsafeArenaSwap(EntityChildrenRequest* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -155,11 +155,11 @@ class EntityRequest final : public ::google::protobuf::MessageLite
 
   // implements Message ----------------------------------------------
 
-  EntityRequest* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::MessageLite::DefaultConstruct<EntityRequest>(arena);
+  EntityChildrenRequest* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::MessageLite::DefaultConstruct<EntityChildrenRequest>(arena);
   }
-  void CopyFrom(const EntityRequest& from);
-  void MergeFrom(const EntityRequest& from) { EntityRequest::MergeImpl(*this, from); }
+  void CopyFrom(const EntityChildrenRequest& from);
+  void MergeFrom(const EntityChildrenRequest& from) { EntityChildrenRequest::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(::google::protobuf::MessageLite& to_msg,
@@ -195,25 +195,25 @@ class EntityRequest final : public ::google::protobuf::MessageLite
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(EntityRequest* other);
+  void InternalSwap(EntityChildrenRequest* other);
  private:
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "EntityRequest"; }
+  static ::absl::string_view FullMessageName() { return "EntityChildrenRequest"; }
 
  protected:
-  explicit EntityRequest(::google::protobuf::Arena* arena);
-  EntityRequest(::google::protobuf::Arena* arena, const EntityRequest& from);
-  EntityRequest(::google::protobuf::Arena* arena, EntityRequest&& from) noexcept
-      : EntityRequest(arena) {
+  explicit EntityChildrenRequest(::google::protobuf::Arena* arena);
+  EntityChildrenRequest(::google::protobuf::Arena* arena, const EntityChildrenRequest& from);
+  EntityChildrenRequest(::google::protobuf::Arena* arena, EntityChildrenRequest&& from) noexcept
+      : EntityChildrenRequest(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
   static void* PlacementNew_(const void*, void* mem,
                              ::google::protobuf::Arena* arena);
   static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataLite<14> _class_data_;
+  static const ::google::protobuf::internal::ClassDataLite<22> _class_data_;
 
  public:
   // nested types ----------------------------------------------------
@@ -238,13 +238,13 @@ class EntityRequest final : public ::google::protobuf::MessageLite
   std::string* _internal_mutable_path();
 
   public:
-  // @@protoc_insertion_point(class_scope:EntityRequest)
+  // @@protoc_insertion_point(class_scope:EntityChildrenRequest)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       0, 1, 0,
-      26, 2>
+      34, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -260,7 +260,7 @@ class EntityRequest final : public ::google::protobuf::MessageLite
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const EntityRequest& from_msg);
+                          const EntityChildrenRequest& from_msg);
     ::google::protobuf::internal::ArenaStringPtr path_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -513,54 +513,54 @@ class Entity final : public ::google::protobuf::MessageLite
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
-// EntityRequest
+// EntityChildrenRequest
 
 // string path = 1;
-inline void EntityRequest::clear_path() {
+inline void EntityChildrenRequest::clear_path() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.path_.ClearToEmpty();
 }
-inline const std::string& EntityRequest::path() const
+inline const std::string& EntityChildrenRequest::path() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:EntityRequest.path)
+  // @@protoc_insertion_point(field_get:EntityChildrenRequest.path)
   return _internal_path();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void EntityRequest::set_path(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void EntityChildrenRequest::set_path(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.path_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:EntityRequest.path)
+  // @@protoc_insertion_point(field_set:EntityChildrenRequest.path)
 }
-inline std::string* EntityRequest::mutable_path() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline std::string* EntityChildrenRequest::mutable_path() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   std::string* _s = _internal_mutable_path();
-  // @@protoc_insertion_point(field_mutable:EntityRequest.path)
+  // @@protoc_insertion_point(field_mutable:EntityChildrenRequest.path)
   return _s;
 }
-inline const std::string& EntityRequest::_internal_path() const {
+inline const std::string& EntityChildrenRequest::_internal_path() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.path_.Get();
 }
-inline void EntityRequest::_internal_set_path(const std::string& value) {
+inline void EntityChildrenRequest::_internal_set_path(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.path_.Set(value, GetArena());
 }
-inline std::string* EntityRequest::_internal_mutable_path() {
+inline std::string* EntityChildrenRequest::_internal_mutable_path() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _impl_.path_.Mutable( GetArena());
 }
-inline std::string* EntityRequest::release_path() {
+inline std::string* EntityChildrenRequest::release_path() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:EntityRequest.path)
+  // @@protoc_insertion_point(field_release:EntityChildrenRequest.path)
   return _impl_.path_.Release();
 }
-inline void EntityRequest::set_allocated_path(std::string* value) {
+inline void EntityChildrenRequest::set_allocated_path(std::string* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.path_.SetAllocated(value, GetArena());
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.path_.IsDefault()) {
     _impl_.path_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:EntityRequest.path)
+  // @@protoc_insertion_point(field_set_allocated:EntityChildrenRequest.path)
 }
 
 // -------------------------------------------------------------------
