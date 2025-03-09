@@ -1,3 +1,1 @@
 I am file3
-changed
-I am a new line of text

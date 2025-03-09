@@ -21,11 +21,11 @@ class ObserverTask{
 class FileObserver{
   public:
   friend class ObserverTask;
-  FileObserver(void (*onChange)(FileChangeEvent event));
+  FileObserver(void (*onChange)(FileChangeEvent& event));
   const FilePtr& append(FilePtr& file);
   void listNames();
   private:
   FilePropsArray files_;
-  void (*onChange_)(FileChangeEvent event);
+  void (*onChange_)(FileChangeEvent& event);
   std::thread observerThread_;
 };

@@ -4,23 +4,29 @@
 #include "file_change_event.h"
 #include <unistd.h>
 
-void onFileChange(FileChangeEvent event){
+void onFileChange(FileChangeEvent& event){
   std::string newName;
+  std::string oldName;
   off_t newSize;
+  off_t oldSize;
   mode_t newMode;
+  mode_t oldMode;
 
   switch(event.getType()){
     case FileChangeEvent::Type::NAME:
-      newName = event.getValue<std::string>();
-      std::cout << "The file name has changed to " << newName << std::endl;
+      newName = event.getNewValue<std::string>();
+      oldName = event.getOldValue<std::string>();
+      std::cout << "The file name has changed from " << oldName << " to " << newName << std::endl;
       break;
     case FileChangeEvent::Type::SIZE:
-      newSize = event.getValue<off_t>();
-      std::cout << "The file size is now " << newSize << std::endl;
+      newSize = event.getNewValue<off_t>();
+      oldSize = event.getOldValue<off_t>();
+      std::cout << "The file size changed from " << oldSize << " to " << newSize << std::endl;
       break;
     case FileChangeEvent::Type::PERMISSIONS:
-      newMode = event.getValue<mode_t>();
-      std::cout << "The file permissions now is " << newMode << std::endl;
+      newMode = event.getNewValue<mode_t>();
+      oldMode = event.getOldValue<mode_t>();
+      std::cout << "The file permissions changed from " << oldMode << " to " << newMode << std::endl;
       break;
   }
 }

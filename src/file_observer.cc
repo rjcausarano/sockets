@@ -15,18 +15,21 @@ void ObserverTask::operator()(){
       mode_t& filePermissions = std::get<3>(fileProps);
       filePtr->checkRenamed();
       if(filePtr->getName() != fileName){
+        std::string oldName = fileName;
         fileName = filePtr->getName();
-        FileChangeEvent event(FileChangeEvent::Type::NAME, &fileName);
+        FileChangeEvent event(FileChangeEvent::Type::NAME, oldName, fileName);
         observer_->onChange_(event);
       }
       if(filePtr->getSize() != fileSize){
+        off_t oldSize = fileSize;
         fileSize = filePtr->getSize();
-        FileChangeEvent event(FileChangeEvent::Type::SIZE, &fileSize);
+        FileChangeEvent event(FileChangeEvent::Type::SIZE, oldSize, fileSize);
         observer_->onChange_(event);
       }
       if(filePtr->getPermissions() != filePermissions){
+        mode_t oldPermissions = filePermissions;
         filePermissions = filePtr->getPermissions();
-        FileChangeEvent event(FileChangeEvent::Type::PERMISSIONS, &filePermissions);
+        FileChangeEvent event(FileChangeEvent::Type::PERMISSIONS, oldPermissions, filePermissions);
         observer_->onChange_(event);
       }
     }
@@ -34,7 +37,7 @@ void ObserverTask::operator()(){
   }
 }
 
-FileObserver::FileObserver(void (*onChange)(FileChangeEvent event)) : onChange_{onChange} {
+FileObserver::FileObserver(void (*onChange)(FileChangeEvent& event)) : onChange_{onChange} {
   observerThread_ = std::thread(ObserverTask(this));
 }
 
