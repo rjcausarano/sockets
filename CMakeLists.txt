@@ -5,9 +5,20 @@ project(sockets)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(Protobuf CONFIG REQUIRED)
+include(FetchContent)
+set(protobuf_BUILD_LIBPROTOBUF OFF CACHE BOOL "Disable full protobuf library" FORCE)
+set(protobuf_BUILD_PROTOBUF_LITE ON CACHE BOOL "Enable protobuf-lite" FORCE)
+set(protobuf_BUILD_TESTS OFF CACHE BOOL "Disable protobuf tests" FORCE)
 
-execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/proto/generate_messages.sh)
+FetchContent_Declare(
+    protobuf
+    GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
+    GIT_TAG v30.0
+)
+
+FetchContent_MakeAvailable(protobuf)
+
+# execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/proto/generate_messages.sh)
 
 include_directories(
   include
